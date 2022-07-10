@@ -1,7 +1,7 @@
 import { Fragment, cloneElement, useState } from 'react';
 import type { NextPage } from 'next';
 
-import { ElevationScrollProp } from './Interfaces';
+import { ElevationScrollProp } from '../Interfaces';
 
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
@@ -18,9 +18,6 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const ElevationScroll = (props: ElevationScrollProp) => {
 	const { children, window } = props;
-	// Note that you normally won't need to set the window ref as useScrollTrigger
-	// will default to window.
-	// This is only being set here because the demo is in an iframe.
 	const trigger = useScrollTrigger({
 		disableHysteresis: true,
 		threshold: 0,

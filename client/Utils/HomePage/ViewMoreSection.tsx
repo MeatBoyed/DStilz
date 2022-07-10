@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-// import ProductCard from '../../Utils/Components/ProductCard';
+import { ProductCard } from '..';
 
-import ProductCardImage from '../../Images/ProductCard.jpg';
+import ProductCardImage from '../../public/ProductCard.jpg';
 
 export const ViewMoreSection: NextPage = () => {
 	return (
@@ -28,9 +28,9 @@ export const ViewMoreSection: NextPage = () => {
 						justifyContent="center"
 						spacing={4}
 					>
-						{/* <ProductCard
+						<ProductCard
 							id="asdsdsd"
-							thumbnail={ProductCardImage}
+							thumbnail={ProductCardImage.src}
 							title="2017 Porsche 911"
 							subtitle="S 2dr PDK"
 							price={0.000016}
@@ -40,7 +40,7 @@ export const ViewMoreSection: NextPage = () => {
 						/>
 						<ProductCard
 							id="asdsdsd"
-							thumbnail={ProductCardImage}
+							thumbnail={ProductCardImage.src}
 							title="2017 Porsche 911"
 							subtitle="S 2dr PDK"
 							price={0.000016}
@@ -50,7 +50,7 @@ export const ViewMoreSection: NextPage = () => {
 						/>
 						<ProductCard
 							id="asdsdsd"
-							thumbnail={ProductCardImage}
+							thumbnail={ProductCardImage.src}
 							title="2017 Porsche 911"
 							subtitle="S 2dr PDK"
 							price={0.000016}
@@ -60,14 +60,14 @@ export const ViewMoreSection: NextPage = () => {
 						/>
 						<ProductCard
 							id="asdsdsd"
-							thumbnail={ProductCardImage}
+							thumbnail={ProductCardImage.src}
 							title="2017 Porsche 911"
 							subtitle="S 2dr PDK"
 							price={0.000016}
 							milage={50000}
 							fuelType="petrol"
 							transmissionType="Automatic"
-						/> */}
+						/>
 					</Grid>
 					<Grid item>
 						<Button
