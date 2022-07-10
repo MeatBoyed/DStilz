@@ -4,10 +4,11 @@ import type { NextPage } from 'next';
 import { ElevationScrollProp } from '../Interfaces';
 
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
+import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
+import { Link as MUILink } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import CssBaseline from '@mui/material/CssBaseline';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -40,19 +41,26 @@ export const Navbar: NextPage = () => {
 					<Toolbar>
 						<Grid container justifyContent="space-between" alignItems="center">
 							<Grid item>
-								<Link
-									variant="h6"
-									to="/"
-									underline="none"
-									sx={{ fontSize: '1.25rem', color: 'black' }}
-								>
-									DASAuto
+								<Link href="/">
+									<MUILink
+										variant="h6"
+										underline="none"
+										sx={{
+											fontSize: '1.25rem',
+											color: 'black',
+											cursor: 'pointer',
+										}}
+									>
+										DASAuto
+									</MUILink>
 								</Link>
 							</Grid>
 							<Grid item>
-								<IconButton to="/favourites" aria-label="favorite">
-									<FavoriteBorderIcon fontSize={auth ? 'large' : 'medium'} />
-								</IconButton>
+								<Link href="/favourites">
+									<IconButton aria-label="favorite">
+										<FavoriteBorderIcon fontSize={auth ? 'large' : 'medium'} />
+									</IconButton>
+								</Link>
 
 								{auth ? (
 									<IconButton aria-label="account button">

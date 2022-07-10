@@ -4,7 +4,8 @@ import type { NextPage } from 'next';
 import { ProductCardProps } from '../Interfaces';
 
 import Card from '@mui/material/Card';
-import Link from '@mui/material/Link';
+import Link from 'next/link';
+import { Link as MUILink } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import CardContent from '@mui/material/Card';
@@ -43,13 +44,14 @@ export const ProductCard: NextPage<ProductCardProps> = ({
 						spacing={2}
 					>
 						<Grid item>
-							<Link
-								variant="h6"
-								to={`/car/${id}`}
-								underline="none"
-								sx={{ color: 'black' }}
-							>
-								{title}
+							<Link href={`/car/${id}`}>
+								<MUILink
+									variant="h6"
+									underline="none"
+									sx={{ color: 'black', cursor: 'pointer' }}
+								>
+									{title}
+								</MUILink>
 							</Link>
 							<Typography variant="subtitle2" gutterBottom>
 								{subtitle}
@@ -66,10 +68,14 @@ export const ProductCard: NextPage<ProductCardProps> = ({
 					</Grid>
 				</CardContent>
 				<CardActions>
-					<Button to={`/car/${id}`}>Details</Button>
-					<IconButton to="/favourites" aria-label="favorite">
-						<FavoriteBorderIcon fontSize="medium" />
-					</IconButton>
+					<Link href={`/car/${id}`}>
+						<Button>Details</Button>
+					</Link>
+					<Link href="/favourites">
+						<IconButton aria-label="favorite">
+							<FavoriteBorderIcon fontSize="medium" />
+						</IconButton>
+					</Link>
 				</CardActions>
 			</Card>
 		</Grid>

@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import type { NextPage } from 'next';
-import styles from '../styles/Home.module.css';
+// import styles from '../styles/Home.module.css';
 
 import {
 	BannerSection,
