@@ -30,12 +30,15 @@ export const ProductCard: NextPage<ProductCardProps> = ({
 	return (
 		<Grid item>
 			<Card sx={{ width: '256px' }}>
-				<CardMedia
-					component="img"
-					alt="Product Card"
-					height="222"
-					image={thumbnail}
-				/>
+				<Link href={`/car/${id}`}>
+					<CardMedia
+						component="img"
+						alt="Product Card"
+						height="222"
+						image={thumbnail}
+						sx={{ cursor: 'pointer' }}
+					/>
+				</Link>
 				<CardContent sx={{ padding: '0.5em' }}>
 					<Grid
 						container
