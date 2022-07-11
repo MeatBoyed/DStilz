@@ -51,7 +51,7 @@ export const Navbar: NextPage = () => {
 											cursor: 'pointer',
 										}}
 									>
-										DASAuto
+										DSTILEZ
 									</MUILink>
 								</Link>
 							</Grid>
