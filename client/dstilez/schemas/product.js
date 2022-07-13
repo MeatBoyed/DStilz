@@ -16,6 +16,7 @@ export default {
 			options: {
 				source: 'name',
 			},
+			validation: (Rule) => Rule.required(),
 		},
 		{
 			name: 'price',

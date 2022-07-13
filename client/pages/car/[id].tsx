@@ -39,15 +39,7 @@ export const ProductPage: NextPage<ProductProps> = ({
 			maxWidth={false}
 			disableGutters={true}
 		>
-			<h1>{title}</h1>
-			<h1>{category}</h1>
-			<h1>{colour}</h1>
-			<h1>{dateOfFirstLicensing}</h1>
-			<h1>{location}</h1>
-			<h1>{milage}</h1>
-			<h1>{price}</h1>
-			<h1>{spareKey}</h1>
-			<HeaderSection />
+			<HeaderSection title={title} price={price} />
 			<DataViewerSection />
 			<DataTableSection />
 			<RecommendSection />

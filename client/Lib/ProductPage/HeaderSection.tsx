@@ -8,8 +8,12 @@ import Typography from '@mui/material/Typography';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { Price } from '../../Utils';
+import { HeaderSectionProps } from '../../Utils/Interfaces';
 
-export const HeaderSection: NextPage = () => {
+export const HeaderSection: NextPage<HeaderSectionProps> = ({
+	title,
+	price,
+}) => {
 	return (
 		<Container sx={{ marginTop: '3em', marginBottom: '3em' }}>
 			{/* Button hover colour */}
@@ -32,11 +36,11 @@ export const HeaderSection: NextPage = () => {
 				}}
 			>
 				<Grid item>
-					<Typography variant="h5">2018 Ford Focus</Typography>
+					<Typography variant="h5">{title}</Typography>
 				</Grid>
 				<Grid item>
 					<Stack direction="row" spacing={2}>
-						<Price price={0.000016} />
+						<Price price={price.toLocaleString()} />
 					</Stack>
 				</Grid>
 			</Grid>

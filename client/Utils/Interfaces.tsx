@@ -32,3 +32,8 @@ export interface DataTable {
 export interface DataTableProps {
 	data: DataTable[];
 }
+
+export interface HeaderSectionProps {
+	title: string;
+	price: number;
+}
