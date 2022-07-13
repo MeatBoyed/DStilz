@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
-import { DataTable } from '..';
+import { DataTable } from '../../Utils';
 
 const DataForTable = [
 	{ title: 'Vehicle Details', data: '' },

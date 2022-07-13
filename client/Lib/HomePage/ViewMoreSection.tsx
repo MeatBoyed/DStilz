@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { ProductCard } from '..';
+import { ProductCard } from '../../Utils';
 
 import ProductCardImage from '../../public/ProductCard.jpg';
 

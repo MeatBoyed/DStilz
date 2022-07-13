@@ -7,7 +7,7 @@ import {
 	CategoriesSection,
 	AboutSection,
 	ViewMoreSection,
-} from '../Utils/HomePage';
+} from '../Lib/HomePage';
 
 const Home: NextPage = () => {
 	return (

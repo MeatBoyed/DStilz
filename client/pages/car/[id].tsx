@@ -6,7 +6,7 @@ import {
 	DataViewerSection,
 	DataTableSection,
 	RecommendSection,
-} from '../../Utils/ProductPage';
+} from '../../Lib/ProductPage';
 
 export const ProductPage: NextPage = () => {
 	return (

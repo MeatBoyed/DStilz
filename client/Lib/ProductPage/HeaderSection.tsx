@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
-import { Price } from '..';
+import { Price } from '../../Utils';
 
 export const HeaderSection: NextPage = () => {
 	return (

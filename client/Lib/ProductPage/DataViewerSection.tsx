@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 
-import { DataTable } from '..';
+import { DataTable } from '../../Utils';
 
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 

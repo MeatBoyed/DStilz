@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import { CategoryCard } from '..';
+import { CategoryCard } from '../../Utils';
 
 import Category from '../../public/Category.jpg';
 
