@@ -9,28 +9,52 @@ import {
 } from '../../Lib/ProductPage';
 
 import { SanityClient } from '../../Utils';
+import { DataTableProps, ProductPageProps } from '../../Utils/Interfaces';
 
-interface ProductProps {
-	title: string;
-	category: string;
-	colour: string;
-	dateOfFirstLicensing: number;
-	location: string;
-	milage: number;
-	price: number;
-	spareKey: string;
-}
-
-export const ProductPage: NextPage<ProductProps> = ({
+export const ProductPage: NextPage<ProductPageProps> = ({
 	title,
-	category,
-	colour,
-	dateOfFirstLicensing,
-	location,
-	milage,
 	price,
-	spareKey,
+
+	// 1st Body Details - Head
+	registrationYear,
+	milage,
+	transmission,
+	sellersComment,
+
+	// 1st Body Details - Vehicle Details
+	previousOwners,
+	serviceHistory,
+	bodyType,
+	// 2nd Body Details - General
+
+	endDate,
+	serviceIntervalDistance,
+
+	// 2nd Body Details - Engine
+	enginePosition,
+	engineDetails,
+	engineCapacity,
+	cylinderLayoutQuantity,
+	fuelType,
+	fuelCapacity,
+	fuelConsumption,
+	fuelRange,
+	powerMaximum,
+	torqueMaximum,
+	acceleration,
+	maximumTopSpeed,
+	co2Emissions,
 }) => {
+	const DataViewerData: DataTableProps = {
+		registrationYear,
+		milage,
+		transmission,
+		previousOwners,
+		serviceHistory,
+		bodyType,
+		endDate,
+		serviceIntervalDistance,
+	};
 	return (
 		<Container
 			id="ProductPage"
@@ -40,7 +64,7 @@ export const ProductPage: NextPage<ProductProps> = ({
 			disableGutters={true}
 		>
 			<HeaderSection title={title} price={price} />
-			<DataViewerSection />
+			<DataViewerSection data={DataViewerData} />
 			<DataTableSection />
 			<RecommendSection />
 		</Container>
@@ -48,32 +72,12 @@ export const ProductPage: NextPage<ProductProps> = ({
 };
 
 export const getServerSideProps = async () => {
-	const query = '*[_type == "product"]';
+	const query =
+		'*[_type == "product" && slug.current == "2013-mercedes-benz-e-class-e350-avantgarde"][0]{slug,title,price,registrationYear,milage,transmission,sellersComment,previousOwners,serviceHistory,bodyType,endDate,serviceIntervalDistance,enginePosition,engineDetails,engineCapacity,cylinderLayoutQuantity,fuelType,fuelCapacity,fuelConsumption,fuelRange,powerMaximum,torqueMaximum,acceleration,maximumTopSpeed,co2Emissions}';
 	const res = await SanityClient.fetch(query);
-	const product: ProductProps = {
-		title: res[0].title,
-		category: res[0].category,
-		colour: res[0].colour,
-		dateOfFirstLicensing: res[0].dateOfFirstLicensing,
-		location: res[0].location,
-		milage: res[0].milage,
-		price: res[0].price,
-		spareKey: res[0].spareKey,
-	};
-
-	console.log(product);
 
 	return {
-		props: {
-			title: product.title,
-			category: product.category,
-			colour: product.colour,
-			dateOfFirstLicensing: product.dateOfFirstLicensing,
-			location: product.location,
-			milage: product.milage,
-			price: product.price,
-			spareKey: product.spareKey,
-		},
+		props: res,
 	};
 };
 

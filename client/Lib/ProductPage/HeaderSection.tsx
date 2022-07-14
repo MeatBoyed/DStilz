@@ -40,7 +40,7 @@ export const HeaderSection: NextPage<HeaderSectionProps> = ({
 				</Grid>
 				<Grid item>
 					<Stack direction="row" spacing={2}>
-						<Price price={price.toLocaleString()} />
+						<Price price={price} />
 					</Stack>
 				</Grid>
 			</Grid>
