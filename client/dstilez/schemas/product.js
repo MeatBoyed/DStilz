@@ -23,6 +23,36 @@ export default {
 			title: 'Price (R)',
 			type: 'number',
 		},
+		{
+			name: 'make',
+			title: 'Make',
+			type: 'string',
+		},
+		{
+			name: 'series',
+			title: 'Series',
+			type: 'string',
+		},
+		{
+			name: 'model',
+			title: 'model',
+			type: 'string',
+		},
+		// Images
+		{
+			name: 'thumbnail',
+			title: 'Thumbnail',
+			type: 'image',
+		},
+		{
+			name: 'images',
+			title: 'Images',
+			type: 'array',
+			of: [{ type: 'image' }],
+			options: {
+				hotspot: true,
+			},
+		},
 		// 1st Body Details - Head
 		{
 			name: 'registrationYear',
@@ -51,43 +81,15 @@ export default {
 			type: 'number',
 		},
 		{
-			name: 'serviceHistory',
-			title: 'Service History',
-			type: 'string',
-			validation: (Rule) =>
-				Rule.custom((serviceHistory) => {
-					if (serviceHistory !== 'Full' || serviceHistory !== 'None') {
-						return false;
-					}
-					return true;
-				}).error('This is an error'),
-		},
-		{
 			name: 'bodyType',
 			title: 'Body Type',
 			type: 'string',
 		},
-		// 2nd Body Details - General
-		{
-			name: 'endDate',
-			title: 'End Date',
-			type: 'date',
-		},
-		{
-			name: 'serviceIntervalDistance',
-			title: 'Service Interval Distance',
-			type: 'string',
-		},
 		// 2nd Body Details - Engine
 		{
-			name: 'enginePosition',
-			title: 'Engine Position',
+			name: 'engineDetail',
+			title: 'Engine Detail',
 			type: 'string',
-		},
-		{
-			name: 'engineDetails',
-			title: 'Engine Details',
-			type: 'number',
 		},
 		{
 			name: 'engineCapacity',
@@ -110,26 +112,6 @@ export default {
 			type: 'number',
 		},
 		{
-			name: 'fuelConsumption',
-			title: 'Fuel Consumptio (per 100km)',
-			type: 'number',
-		},
-		{
-			name: 'fuelRange',
-			title: 'Fuel Range (km)',
-			type: 'number',
-		},
-		{
-			name: 'powerMaximum',
-			title: 'Power Maximum (kW)',
-			type: 'number',
-		},
-		{
-			name: 'torqueMaximum',
-			title: 'Torque Maximum (Nm)',
-			type: 'number',
-		},
-		{
 			name: 'acceleration',
 			title: 'Acceleration (0-100 km/h)',
 			type: 'number',
@@ -137,11 +119,6 @@ export default {
 		{
 			name: 'maximumTopSpeed',
 			title: 'Maximum / Top Speed',
-			type: 'number',
-		},
-		{
-			name: 'co2Emissions',
-			title: 'CO2 Emissions (g/km)',
 			type: 'number',
 		},
 	],

@@ -6,22 +6,20 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 
-import { DataTable } from '../../Utils';
+import { DataViewerTable } from '../../Utils';
 
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { DataViewerSectionProps } from '../../Utils/Interfaces';
 
-const DataForTable = [
-	{ title: 'Vehicle Details', data: '' },
-	{ title: 'Category', data: 'A' },
-	{ title: 'Date of first licensing', data: 2018 },
-	{ title: 'Milage', data: '100km' },
-	{ title: 'Colour', data: 'Red' },
-	{ title: 'Stock Code', data: 'BB7A15884' },
-	{ title: 'Branch', data: 'Ankara' },
-	{ title: 'Spare Key Available', data: 'Yes' },
-];
-
-export const DataViewerSection: NextPage = () => {
+export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
+	make,
+	series,
+	model,
+	registrationYear,
+	milage,
+	transmission,
+	bodyType,
+}) => {
 	return (
 		<Container sx={{ marginTop: '3em', marginBottom: '3em' }}>
 			<Grid
@@ -38,7 +36,15 @@ export const DataViewerSection: NextPage = () => {
 				</Grid>
 				<Grid item xs={5} container direction="column" spacing={2}>
 					<Grid item>
-						<DataTable data={DataForTable} />
+						<DataViewerTable
+							make={make}
+							series={series}
+							model={model}
+							registrationYear={registrationYear}
+							milage={milage}
+							transmission={transmission}
+							bodyType={bodyType}
+						/>
 					</Grid>
 					<Grid item>
 						<Stack direction="column" spacing={2}>

@@ -29,10 +29,6 @@ export interface DataTable {
 	data: string | number;
 }
 
-export interface DataTableProps {
-	data: DataTable[];
-}
-
 export interface HeaderSectionProps {
 	title: string;
 	price: number;
@@ -48,6 +44,15 @@ export interface ProductPageProps {
 	title: string;
 	price: number;
 
+	make: string;
+	series: string;
+	model: string;
+
+	// thumbnail: string;
+	image: [
+		{ _key: string; _type: string; asset: { _ref: string; _type: string } }
+	];
+
 	// 1st Body Details - Head
 	registrationYear: string;
 	milage: number;
@@ -56,25 +61,35 @@ export interface ProductPageProps {
 
 	// 1st Body Details - Vehicle Details
 	previousOwners: number;
-	serviceHistory: string;
 	bodyType: string;
-	// 2nd Body Details - General
-
-	endDate: string;
-	serviceIntervalDistance: string;
-
 	// 2nd Body Details - Engine
-	enginePosition: string;
-	engineDetails: number;
+	engineDetail: string;
 	engineCapacity: number;
 	cylinderLayoutQuantity: string;
 	fuelType: string;
 	fuelCapacity: number;
 	fuelConsumption: number;
-	fuelRange: number;
-	powerMaximum: number;
-	torqueMaximum: number;
 	acceleration: number;
 	maximumTopSpeed: number;
-	co2Emissions: number;
+}
+
+export interface DataViewerSectionProps {
+	make: string;
+	series: string;
+	model: string;
+	registrationYear: string;
+	milage: number;
+	bodyType: string;
+	transmission: string;
+}
+
+export interface DataTableProps {
+	previousOwners: number;
+	engineDetail: string;
+	engineCapacity: number;
+	cylinderLayoutQuantity: string;
+	fuelType: string;
+	fuelCapacity: number;
+	acceleration: number;
+	maximumTopSpeed: number;
 }

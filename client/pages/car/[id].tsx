@@ -9,11 +9,17 @@ import {
 } from '../../Lib/ProductPage';
 
 import { SanityClient } from '../../Utils';
-import { DataTableProps, ProductPageProps } from '../../Utils/Interfaces';
+import { ProductPageProps } from '../../Utils/Interfaces';
 
 export const ProductPage: NextPage<ProductPageProps> = ({
 	title,
 	price,
+
+	make,
+	series,
+	model,
+
+	image,
 
 	// 1st Body Details - Head
 	registrationYear,
@@ -23,38 +29,17 @@ export const ProductPage: NextPage<ProductPageProps> = ({
 
 	// 1st Body Details - Vehicle Details
 	previousOwners,
-	serviceHistory,
 	bodyType,
-	// 2nd Body Details - General
-
-	endDate,
-	serviceIntervalDistance,
-
 	// 2nd Body Details - Engine
-	enginePosition,
-	engineDetails,
+	engineDetail,
 	engineCapacity,
 	cylinderLayoutQuantity,
 	fuelType,
 	fuelCapacity,
-	fuelConsumption,
-	fuelRange,
-	powerMaximum,
-	torqueMaximum,
 	acceleration,
 	maximumTopSpeed,
-	co2Emissions,
 }) => {
-	const DataViewerData: DataTableProps = {
-		registrationYear,
-		milage,
-		transmission,
-		previousOwners,
-		serviceHistory,
-		bodyType,
-		endDate,
-		serviceIntervalDistance,
-	};
+	// export const ProductPage: NextPage = () => {
 	return (
 		<Container
 			id="ProductPage"
@@ -64,8 +49,25 @@ export const ProductPage: NextPage<ProductPageProps> = ({
 			disableGutters={true}
 		>
 			<HeaderSection title={title} price={price} />
-			<DataViewerSection data={DataViewerData} />
-			<DataTableSection />
+			<DataViewerSection
+				bodyType={bodyType}
+				make={make}
+				series={series}
+				model={model}
+				registrationYear={registrationYear}
+				milage={milage}
+				transmission={transmission}
+			/>
+			<DataTableSection
+				previousOwners={previousOwners}
+				engineDetail={engineDetail}
+				engineCapacity={engineCapacity}
+				cylinderLayoutQuantity={cylinderLayoutQuantity}
+				fuelType={fuelType}
+				fuelCapacity={fuelCapacity}
+				acceleration={acceleration}
+				maximumTopSpeed={maximumTopSpeed}
+			/>
 			<RecommendSection />
 		</Container>
 	);
@@ -73,8 +75,8 @@ export const ProductPage: NextPage<ProductPageProps> = ({
 
 export const getServerSideProps = async () => {
 	const query =
-		'*[_type == "product" && slug.current == "2013-mercedes-benz-e-class-e350-avantgarde"][0]{slug,title,price,registrationYear,milage,transmission,sellersComment,previousOwners,serviceHistory,bodyType,endDate,serviceIntervalDistance,enginePosition,engineDetails,engineCapacity,cylinderLayoutQuantity,fuelType,fuelCapacity,fuelConsumption,fuelRange,powerMaximum,torqueMaximum,acceleration,maximumTopSpeed,co2Emissions}';
-	const res = await SanityClient.fetch(query);
+		'*[_type == "product" && slug.current == "mercedes-benz-cla-cla250-sport"][0]{slug,title,price,make, series, model,image,registrationYear,milage,transmission,sellersComment,previousOwners,bodyType,engineDetail,engineCapacity,cylinderLayoutQuantity,fuelType,fuelCapacity,acceleration,maximumTopSpeed}';
+	const res: ProductPageProps = await SanityClient.fetch(query);
 
 	return {
 		props: res,
