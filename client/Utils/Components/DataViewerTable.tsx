@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import { DataViewerSectionProps } from '../Interfaces';
+import { DataViewerTableProps } from '../Interfaces';
 
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -9,7 +9,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 
-export const DataViewerTable: NextPage<DataViewerSectionProps> = ({
+export const DataViewerTable: NextPage<DataViewerTableProps> = ({
 	make,
 	series,
 	model,
@@ -17,7 +17,6 @@ export const DataViewerTable: NextPage<DataViewerSectionProps> = ({
 	milage,
 	transmission,
 	bodyType,
-	images,
 }) => {
 	return (
 		<TableContainer component={Paper}>
