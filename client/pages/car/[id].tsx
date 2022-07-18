@@ -19,7 +19,7 @@ export const ProductPage: NextPage<ProductPageProps> = ({
 	series,
 	model,
 
-	image,
+	images,
 
 	// 1st Body Details - Head
 	registrationYear,
@@ -39,7 +39,6 @@ export const ProductPage: NextPage<ProductPageProps> = ({
 	acceleration,
 	maximumTopSpeed,
 }) => {
-	// export const ProductPage: NextPage = () => {
 	return (
 		<Container
 			id="ProductPage"
@@ -57,6 +56,7 @@ export const ProductPage: NextPage<ProductPageProps> = ({
 				registrationYear={registrationYear}
 				milage={milage}
 				transmission={transmission}
+				images={images}
 			/>
 			<DataTableSection
 				previousOwners={previousOwners}
@@ -75,7 +75,7 @@ export const ProductPage: NextPage<ProductPageProps> = ({
 
 export const getServerSideProps = async () => {
 	const query =
-		'*[_type == "product" && slug.current == "mercedes-benz-cla-cla250-sport"][0]{slug,title,price,make, series, model,image,registrationYear,milage,transmission,sellersComment,previousOwners,bodyType,engineDetail,engineCapacity,cylinderLayoutQuantity,fuelType,fuelCapacity,acceleration,maximumTopSpeed}';
+		'*[_type == "product" && slug.current == "mercedes-benz-cla-cla250-sport"][0]{slug,title,price,make, series, model,images,registrationYear,milage,transmission,sellersComment,previousOwners,bodyType,engineDetail,engineCapacity,cylinderLayoutQuantity,fuelType,fuelCapacity,acceleration,maximumTopSpeed}';
 	const res: ProductPageProps = await SanityClient.fetch(query);
 
 	return {

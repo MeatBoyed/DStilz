@@ -49,9 +49,7 @@ export interface ProductPageProps {
 	model: string;
 
 	// thumbnail: string;
-	image: [
-		{ _key: string; _type: string; asset: { _ref: string; _type: string } }
-	];
+	images: [ImageObject];
 
 	// 1st Body Details - Head
 	registrationYear: string;
@@ -81,6 +79,7 @@ export interface DataViewerSectionProps {
 	milage: number;
 	bodyType: string;
 	transmission: string;
+	images: [ImageObject];
 }
 
 export interface DataTableProps {
@@ -92,4 +91,10 @@ export interface DataTableProps {
 	fuelCapacity: number;
 	acceleration: number;
 	maximumTopSpeed: number;
+}
+
+export interface ImageObject {
+	_key: string;
+	_type: string;
+	asset: { _ref: string; _type: string };
 }

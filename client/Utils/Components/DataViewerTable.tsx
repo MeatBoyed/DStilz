@@ -17,6 +17,7 @@ export const DataViewerTable: NextPage<DataViewerSectionProps> = ({
 	milage,
 	transmission,
 	bodyType,
+	images,
 }) => {
 	return (
 		<TableContainer component={Paper}>
