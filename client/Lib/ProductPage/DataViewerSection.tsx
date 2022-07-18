@@ -83,7 +83,6 @@ export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 							milage={milage}
 							transmission={transmission}
 							bodyType={bodyType}
-							images={images}
 						/>
 					</Grid>
 					<Grid item>

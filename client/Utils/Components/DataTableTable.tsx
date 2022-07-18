@@ -79,7 +79,7 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{engineCapacity}
+							{engineCapacity} L
 						</TableCell>
 					</TableRow>
 					<TableRow>
@@ -118,7 +118,7 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{fuelCapacity}
+							{fuelCapacity} L
 						</TableCell>
 					</TableRow>
 					<TableRow>
@@ -131,7 +131,7 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{acceleration}
+							{acceleration} s
 						</TableCell>
 					</TableRow>
 					<TableRow>
@@ -144,7 +144,7 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{maximumTopSpeed}
+							{maximumTopSpeed} Km/h
 						</TableCell>
 					</TableRow>
 				</TableBody>

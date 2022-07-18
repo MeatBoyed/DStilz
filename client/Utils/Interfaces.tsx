@@ -49,10 +49,10 @@ export interface ProductPageProps {
 	model: string;
 
 	// thumbnail: string;
-	images: Array<ImageObject>;
+	images: [ImageObject];
 
 	// 1st Body Details - Head
-	registrationYear: string;
+	registrationYear: number;
 	milage: number;
 	transmission: string;
 	sellersComment: string;
@@ -75,17 +75,17 @@ export interface DataViewerSectionProps {
 	make: string;
 	series: string;
 	model: string;
-	registrationYear: string;
+	registrationYear: number;
 	milage: number;
 	bodyType: string;
 	transmission: string;
-	images: Array<ImageObject>;
+	images: [ImageObject];
 }
 export interface DataViewerTableProps {
 	make: string;
 	series: string;
 	model: string;
-	registrationYear: string;
+	registrationYear: number;
 	milage: number;
 	bodyType: string;
 	transmission: string;
