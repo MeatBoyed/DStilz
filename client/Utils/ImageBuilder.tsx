@@ -9,7 +9,7 @@ const imageBuilder = (
 	width: number,
 	height: number
 ): string => {
-	return builder.image(image).width(width).height(height).url();
+	return builder.image(image).size(width, height).auto('format').url();
 };
 
 export default imageBuilder;
