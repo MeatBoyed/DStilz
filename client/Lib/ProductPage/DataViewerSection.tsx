@@ -11,7 +11,7 @@ import { DataViewerTable } from '../../Utils';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { DataViewerSectionProps } from '../../Utils/Interfaces';
 import { useState } from 'react';
-import imageBuilder from '../../Utils/ImageBuilder';
+import { imageBuilder } from '../../Utils';
 
 export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 	make,

@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography';
 
 import { ProductCard } from '../../Utils';
 
-import ProductCardImage from '../../public/ProductCard.jpg';
+import { ViewMoreSectionData } from '../../Utils/Interfaces';
 
-export const ViewMoreSection: NextPage = () => {
+export const ViewMoreSection: NextPage<ViewMoreSectionData> = ({ data }) => {
 	return (
 		<Container maxWidth={false} sx={{ marginBottom: '3em' }}>
 			<Container>
@@ -28,46 +28,9 @@ export const ViewMoreSection: NextPage = () => {
 						justifyContent="center"
 						spacing={4}
 					>
-						<ProductCard
-							id="asdsdsd"
-							thumbnail={ProductCardImage.src}
-							title="2017 Porsche 911"
-							subtitle="S 2dr PDK"
-							price={0.000016}
-							milage={50000}
-							fuelType="petrol"
-							transmissionType="Automatic"
-						/>
-						<ProductCard
-							id="asdsdsd"
-							thumbnail={ProductCardImage.src}
-							title="2017 Porsche 911"
-							subtitle="S 2dr PDK"
-							price={0.000016}
-							milage={50000}
-							fuelType="petrol"
-							transmissionType="Automatic"
-						/>
-						<ProductCard
-							id="asdsdsd"
-							thumbnail={ProductCardImage.src}
-							title="2017 Porsche 911"
-							subtitle="S 2dr PDK"
-							price={0.000016}
-							milage={50000}
-							fuelType="petrol"
-							transmissionType="Automatic"
-						/>
-						<ProductCard
-							id="asdsdsd"
-							thumbnail={ProductCardImage.src}
-							title="2017 Porsche 911"
-							subtitle="S 2dr PDK"
-							price={0.000016}
-							milage={50000}
-							fuelType="petrol"
-							transmissionType="Automatic"
-						/>
+						{data.map((product, i) => (
+							<ProductCard key={i} product={product} />
+						))}
 					</Grid>
 					<Grid item>
 						<Button

@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 
 import ProductCard from '../../Utils/Components/ProductCard';
 
-import ProductCardImage from '../../public/ProductCard.jpg';
+import { ViewMoreSectionData } from '../../Utils/Interfaces';
 
-export const RecommendSection: NextPage = () => {
+export const RecommendSection: NextPage<ViewMoreSectionData> = ({ data }) => {
 	return (
 		<Container sx={{ marginTop: '6em', marginBottom: '10em' }}>
 			<Typography
@@ -24,46 +24,9 @@ export const RecommendSection: NextPage = () => {
 				Recommened
 			</Typography>
 			<Grid container alignItems="center" justifyContent="center" spacing={5}>
-				<ProductCard
-					id="asdsdsd"
-					thumbnail={ProductCardImage.src}
-					title="2017 Porsche 911"
-					subtitle="S 2dr PDK"
-					price={0.000016}
-					milage={50000}
-					fuelType="petrol"
-					transmissionType="Automatic"
-				/>
-				<ProductCard
-					id="asdsdsd"
-					thumbnail={ProductCardImage.src}
-					title="2017 Porsche 911"
-					subtitle="S 2dr PDK"
-					price={0.000016}
-					milage={50000}
-					fuelType="petrol"
-					transmissionType="Automatic"
-				/>
-				<ProductCard
-					id="asdsdsd"
-					thumbnail={ProductCardImage.src}
-					title="2017 Porsche 911"
-					subtitle="S 2dr PDK"
-					price={0.000016}
-					milage={50000}
-					fuelType="petrol"
-					transmissionType="Automatic"
-				/>
-				<ProductCard
-					id="asdsdsd"
-					thumbnail={ProductCardImage.src}
-					title="2017 Porsche 911"
-					subtitle="S 2dr PDK"
-					price={0.000016}
-					milage={50000}
-					fuelType="petrol"
-					transmissionType="Automatic"
-				/>
+				{data.map((product, i) => (
+					<ProductCard key={i} product={product} />
+				))}
 			</Grid>
 		</Container>
 	);

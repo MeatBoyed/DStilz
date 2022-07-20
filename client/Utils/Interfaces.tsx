@@ -1,7 +1,14 @@
+import { ParsedUrlQuery } from 'querystring';
+
 export interface CategoryCardProps {
 	title: string;
 	image: string;
 	link?: string;
+}
+
+export interface Slug {
+	_type: string;
+	current: string;
 }
 
 export interface ElevationScrollProp {
@@ -9,15 +16,17 @@ export interface ElevationScrollProp {
 	children: React.ReactElement;
 }
 
-export interface ProductCardProps {
-	id: string;
-	thumbnail: string;
+export interface ProductCardData {
+	slug: Slug;
 	title: string;
-	subtitle: string;
+	thumbnail: ImageObject;
+	make: string;
+	model: string;
+	registrationYear: string;
 	price: number;
 	milage: number;
 	fuelType: string;
-	transmissionType: 'Automatic' | 'Manual';
+	transmission: string;
 }
 
 export interface PriceProps {
@@ -34,12 +43,9 @@ export interface HeaderSectionProps {
 	price: number;
 }
 
-export interface ProductPageProps {
+export interface ProductData {
 	// MetaData
-	slug: {
-		_type: string;
-		current: string;
-	};
+	slug: Slug;
 	// Header Details
 	title: string;
 	price: number;
@@ -69,6 +75,11 @@ export interface ProductPageProps {
 	fuelConsumption: number;
 	acceleration: number;
 	maximumTopSpeed: number;
+}
+
+export interface ProductPageProps {
+	recommendedData: [ProductCardData];
+	productData: ProductData;
 }
 
 export interface DataViewerSectionProps {
@@ -106,4 +117,12 @@ export interface ImageObject {
 	_key: string;
 	_type: string;
 	asset: { _ref: string; _type: string };
+}
+
+export interface ViewMoreSectionData {
+	data: [ProductCardData];
+}
+
+export interface CarPageContext extends ParsedUrlQuery {
+	slug: string;
 }

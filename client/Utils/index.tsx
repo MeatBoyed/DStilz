@@ -1,9 +1,10 @@
 export { default as Theme } from './Theme';
+export { SanityClient } from './SanityClient';
+export { imageBuilder } from './SanityClient';
 export { default as Price } from './Components/Price';
 export { default as Navbar } from './Components/Navbar';
 export { default as Footer } from './Components/Footer';
 export { default as CategoryCard } from './Components/CategoryCard';
 export { default as ProductCard } from './Components/ProductCard';
-export { default as SanityClient } from './SanityClient';
 export { default as DataViewerTable } from './Components/DataViewerTable';
 export { default as DataTableTable } from './Components/DataTableTable';
