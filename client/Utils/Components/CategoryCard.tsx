@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import type { NextPage } from 'next';
 import { CategoryCardProps } from '../Interfaces';
 
@@ -16,6 +17,7 @@ export const CategoryCard: NextPage<CategoryCardProps> = ({
 		Paper: {
 			height: '382px',
 			width: '243px',
+			borderRadius: '10px',
 		},
 		Title: { color: '#ffff', fontSize: '2.5em' },
 	};
@@ -28,25 +30,37 @@ export const CategoryCard: NextPage<CategoryCardProps> = ({
 					direction="column"
 					alignItems="center"
 					justifyContent="center"
-					style={{
-						height: '100%',
-						backgroundImage: `url(${image})`,
-						backgroundPosition: 'center',
-						backgroundRepeat: 'no-repeat',
-						backgroundSize: 'cover',
-						borderRadius: '4px',
-					}}
-					spacing={2}
 				>
-					<Grid item>
-						<Typography variant="h5" sx={Styles.Title}>
-							{title}
-						</Typography>
+					<Grid
+						item
+						sx={{
+							width: '243px',
+							height: '382px',
+							position: 'relative',
+							borderRadius: '10px',
+						}}
+					>
+						<Image src={image} layout="fill" objectFit="cover" alt="yes" />
 					</Grid>
-					<Grid item>
-						<Button variant="contained" size="large">
-							Shop Now
-						</Button>
+					<Grid
+						item
+						container
+						direction="column"
+						alignItems="center"
+						justifyContent="center"
+						spacing={2}
+						sx={{ position: 'absolute' }}
+					>
+						<Grid item>
+							<Typography variant="h5" sx={Styles.Title}>
+								{title}
+							</Typography>
+						</Grid>
+						<Grid item>
+							<Button variant="contained" size="large">
+								Shop Now
+							</Button>
+						</Grid>
 					</Grid>
 				</Grid>
 			</Paper>
