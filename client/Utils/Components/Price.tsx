@@ -24,7 +24,7 @@ export const Price: NextPage<PriceProps> = ({ price }) => {
 					align="center"
 					sx={{ fontSize: `${'18px'}`, color: '#F47920' }}
 				>
-					{price}
+					{price.toLocaleString()}
 				</Typography>
 			</Grid>
 		</Grid>

@@ -16,6 +16,8 @@
 		"@fontsource/roboto": "^4.5.7",
 		"@mui/icons-material": "^5.8.4",
 		"@mui/material": "^5.8.7",
+		"@sanity/client": "^3.3.2",
+		"@sanity/image-url": "^1.0.1",
 		"next": "12.2.2",
 		"react": "18.2.0",
 		"react-dom": "18.2.0"

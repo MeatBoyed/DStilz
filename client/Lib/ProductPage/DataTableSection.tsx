@@ -3,7 +3,8 @@ import type { NextPage } from 'next';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
-import { DataTable } from '..';
+import { DataTableProps } from '../../Utils/Interfaces';
+import { DataTableTable } from '../../Utils';
 
 const DataForTable = [
 	{ title: 'Vehicle Details', data: '' },
@@ -23,7 +24,16 @@ const DataForTable = [
 	{ title: 'Spare Key Available', data: 'Yes' },
 ];
 
-export const DataTableSection: NextPage = () => {
+export const DataTableSection: NextPage<DataTableProps> = ({
+	previousOwners,
+	engineCapacity,
+	engineDetail,
+	cylinderLayoutQuantity,
+	fuelType,
+	fuelCapacity,
+	acceleration,
+	maximumTopSpeed,
+}) => {
 	return (
 		<Container sx={{ marginTop: '8em', marginBottom: '3em' }}>
 			<Grid
@@ -33,7 +43,16 @@ export const DataTableSection: NextPage = () => {
 				sx={{ width: '100%' }}
 			>
 				<Grid item xs={12}>
-					<DataTable data={DataForTable} />
+					<DataTableTable
+						previousOwners={previousOwners}
+						engineDetail={engineDetail}
+						engineCapacity={engineCapacity}
+						cylinderLayoutQuantity={cylinderLayoutQuantity}
+						fuelType={fuelType}
+						fuelCapacity={fuelCapacity}
+						acceleration={acceleration}
+						maximumTopSpeed={maximumTopSpeed}
+					/>
 				</Grid>
 			</Grid>
 		</Container>
