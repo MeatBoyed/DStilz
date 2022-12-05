@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { NextPage } from 'next';
 
 import Grid from '@mui/material/Grid';
@@ -9,11 +10,8 @@ import Banner from '../../public/Banner.jpg';
 
 export const BannerSection: NextPage = () => {
 	const bannerStyle = {
-		backgroundImage: `url(${Banner.src})`,
+		width: '100%',
 		height: '80vh',
-		backgroundPosition: 'center',
-		backgroundRepeat: 'no-repeat',
-		backgroundSize: 'cover',
 	};
 
 	return (
@@ -23,30 +21,54 @@ export const BannerSection: NextPage = () => {
 			direction="column"
 			alignItems="center"
 			justifyContent="center"
-			spacing={2}
 			sx={bannerStyle}
 		>
-			<Grid item>
-				<Typography
-					variant="h6"
-					align="center"
-					sx={{ color: '#ffff', fontSize: '2em' }}
-				>
-					Buy Your Car Today, At Cheaper Prices
-				</Typography>
+			<Grid
+				item
+				sx={{
+					width: '100%',
+					height: '80vh',
+					position: 'relative',
+				}}
+			>
+				<Image
+					src={Banner.src}
+					layout="fill"
+					objectFit="cover"
+					alt="Homepage Banner"
+				/>
 			</Grid>
-			<Grid item sx={{ marginBottom: '10em' }}>
-				<Button
-					variant="contained"
-					size="large"
-					fullWidth={true}
-					sx={{
-						backgroundColor: '#F33939',
-						':hover': { backgroundColor: '#F33939' },
-					}}
-				>
-					Buy Now
-				</Button>
+			<Grid
+				item
+				container
+				direction="column"
+				alignItems="center"
+				justifyContent="center"
+				spacing={2}
+				sx={{ position: 'absolute' }}
+			>
+				<Grid item>
+					<Typography
+						variant="h6"
+						align="center"
+						sx={{ color: '#ffff', fontSize: '2em' }}
+					>
+						Buy Your Car Today, At Cheaper Prices
+					</Typography>
+				</Grid>
+				<Grid item sx={{ marginBottom: '10em' }}>
+					<Button
+						variant="contained"
+						size="large"
+						fullWidth={true}
+						sx={{
+							backgroundColor: '#F33939',
+							':hover': { backgroundColor: '#F33939' },
+						}}
+					>
+						Buy Now
+					</Button>
+				</Grid>
 			</Grid>
 		</Grid>
 	);
