@@ -5,6 +5,7 @@ import { ProductCardData } from '../Interfaces';
 
 import Card from '@mui/material/Card';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Link as MUILink } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -24,18 +25,18 @@ interface props {
 
 export const ProductCard: NextPage<props> = ({ product }) => {
 	const router = useRouter();
+	const ProductURL = `/car/${encodeURIComponent(product.slug.current)}`;
 	return (
 		<Grid item>
 			<Card sx={{ width: '256px' }}>
-				<Link href={`/car/${encodeURIComponent(product.slug.current)}`}>
-					<CardMedia
-						component="img"
-						alt="Product Card"
-						height="222"
-						image={imageBuilder(product.thumbnail, 250, 200)}
-						sx={{ cursor: 'pointer' }}
-					/>
-				</Link>
+				<Image
+					src={imageBuilder(product.thumbnail, 250, 250)}
+					layout="responsive"
+					height={250}
+					width={250}
+					onClick={() => router.push(ProductURL)}
+					alt={`${product.title} Thumbnail`}
+				/>
 				<CardContent sx={{ padding: '0.5em' }}>
 					<Grid
 						container
@@ -44,7 +45,7 @@ export const ProductCard: NextPage<props> = ({ product }) => {
 						spacing={2}
 					>
 						<Grid item>
-							<Link href={`/car/${encodeURIComponent(product.slug.current)}`}>
+							<Link href={ProductURL}>
 								<MUILink
 									variant="h6"
 									underline="none"
@@ -69,14 +70,13 @@ export const ProductCard: NextPage<props> = ({ product }) => {
 					</Grid>
 				</CardContent>
 				<CardActions>
-					<Link href={`/car/${encodeURIComponent(product.slug.current)}`}>
-						<Button>Details</Button>
-					</Link>
-					<Link href="/favourites">
-						<IconButton aria-label="favorite">
-							<FavoriteBorderIcon fontSize="medium" />
-						</IconButton>
-					</Link>
+					<Button onClick={() => router.push(ProductURL)}>Details</Button>
+					<IconButton
+						aria-label="favorite"
+						onClick={() => router.push('/favourites')}
+					>
+						<FavoriteBorderIcon fontSize="medium" />
+					</IconButton>
 				</CardActions>
 			</Card>
 		</Grid>
