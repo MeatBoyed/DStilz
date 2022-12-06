@@ -16,7 +16,7 @@ import { ViewMoreSectionData } from '../Utils/Interfaces';
 // Error handling for no Internet
 const Home: NextPage<ViewMoreSectionData> = ({ data }) => {
 	return (
-		<Container id="HomePage" disableGutters={true}>
+		<Container id="HomePage" maxWidth={false} disableGutters={true}>
 			<Grid
 				container
 				justifyContent="center"
