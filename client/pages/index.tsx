@@ -26,14 +26,21 @@ const Home: NextPage<ViewMoreSectionData> = ({ data }) => {
 				<Grid item sx={{ width: '100%' }}>
 					<BannerSection />
 				</Grid>
-				<Grid item sx={{ width: '100%' }}>
-					<CategoriesSection />
+				<Grid item>
+					<h1>Search Box</h1>
 				</Grid>
+				{/* <Grid item sx={{ width: '100%' }}>
+					<CategoriesSection />
+				</Grid> */}
 				<Grid item sx={{ width: '100%' }}>
 					<AboutSection />
 				</Grid>
 				<Grid item sx={{ width: '100%' }}>
 					<ViewMoreSection data={data} />
+				</Grid>
+
+				<Grid item>
+					<h1>Contact forum</h1>
 				</Grid>
 			</Grid>
 		</Container>
