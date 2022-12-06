@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import type { GetStaticProps, NextPage } from 'next';
 // import styles from '../styles/Home.module.css';
 
@@ -16,16 +16,26 @@ import { ViewMoreSectionData } from '../Utils/Interfaces';
 // Error handling for no Internet
 const Home: NextPage<ViewMoreSectionData> = ({ data }) => {
 	return (
-		<Container
-			id="HomePage"
-			component="section"
-			maxWidth={false}
-			disableGutters={true}
-		>
-			<BannerSection />
-			<CategoriesSection />
-			<AboutSection />
-			<ViewMoreSection data={data} />
+		<Container id="HomePage" disableGutters={true}>
+			<Grid
+				container
+				justifyContent="center"
+				alignItems="center"
+				sx={{ width: '100%' }}
+			>
+				<Grid item sx={{ width: '100%' }}>
+					<BannerSection />
+				</Grid>
+				<Grid item sx={{ width: '100%' }}>
+					<CategoriesSection />
+				</Grid>
+				<Grid item sx={{ width: '100%' }}>
+					<AboutSection />
+				</Grid>
+				<Grid item sx={{ width: '100%' }}>
+					<ViewMoreSection data={data} />
+				</Grid>
+			</Grid>
 		</Container>
 	);
 };
