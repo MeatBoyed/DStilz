@@ -39,7 +39,13 @@ export const Navbar: NextPage = () => {
 			<ElevationScroll>
 				<AppBar color="default">
 					<Toolbar>
-						<Grid container justifyContent="space-between" alignItems="center">
+						<Grid
+							container
+							id="Navbar"
+							width="100%"
+							justifyContent="space-between"
+							alignItems="center"
+						>
 							<Grid item>
 								<Link href="/">
 									<MUILink
@@ -55,6 +61,7 @@ export const Navbar: NextPage = () => {
 									</MUILink>
 								</Link>
 							</Grid>
+
 							<Grid item>
 								<Link href="/favourites">
 									<IconButton aria-label="favorite">
@@ -67,7 +74,7 @@ export const Navbar: NextPage = () => {
 										<AccountCircleIcon fontSize="large" />
 									</IconButton>
 								) : (
-									<ButtonGroup variant="text" color="inherit" size="large">
+									<ButtonGroup variant="text" color="inherit" size="medium">
 										<Button style={{ color: 'rgba(244, 121, 32, 1)' }}>
 											Sign Up
 										</Button>
