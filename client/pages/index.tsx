@@ -4,7 +4,11 @@ import { Container, Grid } from '@mui/material';
 import type { GetStaticProps, NextPage } from 'next';
 // import styles from '../styles/Home.module.css';
 
-import { BannerSection, CategoriesSection } from '../Lib/HomePage';
+import {
+	BannerSection,
+	CategoriesSection,
+	SearchBoxSection,
+} from '../Lib/HomePage';
 const ViewMoreSection = dynamic(
 	() => import('../Lib/HomePage/ViewMoreSection')
 );
@@ -26,12 +30,9 @@ const Home: NextPage<ViewMoreSectionData> = ({ data }) => {
 				<Grid item sx={{ width: '100%' }}>
 					<BannerSection />
 				</Grid>
-				<Grid item>
-					<h1>Search Box</h1>
+				<Grid item sx={{ width: '100%' }}>
+					<SearchBoxSection />
 				</Grid>
-				{/* <Grid item sx={{ width: '100%' }}>
-					<CategoriesSection />
-				</Grid> */}
 				<Grid item sx={{ width: '100%' }}>
 					<AboutSection />
 				</Grid>
