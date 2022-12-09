@@ -97,7 +97,7 @@ export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 									bgcolor: '#F47920',
 								}}
 							>
-								Buy Now
+								Enquire Now
 							</Button>
 							<Button
 								variant="contained"
@@ -107,9 +107,10 @@ export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 									justifyContent: 'space-between',
 									fontSize: '1em',
 									bgcolor: '#444C53',
+									textTransform: 'none',
 								}}
 							>
-								Enquire About This Vehicle
+								Message Salesperson
 							</Button>
 						</Stack>
 					</Grid>
