@@ -11,7 +11,12 @@ import { ViewMoreSectionData } from '../../Utils/Interfaces';
 
 export const ViewMoreSection: NextPage<ViewMoreSectionData> = ({ data }) => {
 	return (
-		<Container maxWidth={false} sx={{ marginBottom: '3em' }}>
+		<Container
+			maxWidth={false}
+			sx={{ marginBottom: '3em' }}
+			id="ViewMoreSection"
+			componet="section"
+		>
 			<Container>
 				<Typography
 					variant="h5"

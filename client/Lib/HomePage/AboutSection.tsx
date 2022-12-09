@@ -10,7 +10,7 @@ export const AboutSection: NextPage = () => {
 		<Container
 			maxWidth={false}
 			sx={{
-				marginTop: '8.5em',
+				marginTop: '5em',
 				marginBottom: '3em',
 				paddingBottom: '3em',
 				background: '#E8E9EA',
