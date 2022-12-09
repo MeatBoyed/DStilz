@@ -1,17 +1,13 @@
+import dynamic from 'next/dynamic';
 import type { NextPage } from 'next';
 
-import Image from 'next/image';
-
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import { Autocomplete, MenuItem, Select, TextField } from '@mui/material';
-import { useState } from 'react';
 
-import CarSale from '../../public/CarSales.png';
-import { CategoryCard, InfoCard, InfoCardRender, SearchBox } from '../../Utils';
+import { SearchBox } from '../../Utils';
+const InfoCardRender = dynamic(
+	() => import('../../Utils/Components/InfoCardRender')
+);
 
 export const SearchBoxSection: NextPage = () => {
 	return (
