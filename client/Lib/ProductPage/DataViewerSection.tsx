@@ -53,7 +53,6 @@ export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 					<Grid
 						item
 						container
-						spacing={0.6}
 						justifyContent="space-between"
 						alignItems="center"
 						direction="row"
