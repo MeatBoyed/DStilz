@@ -35,7 +35,7 @@ export const DataTableSection: NextPage<DataTableProps> = ({
 	maximumTopSpeed,
 }) => {
 	return (
-		<Container sx={{ marginTop: '8em', marginBottom: '3em' }}>
+		<Container sx={{ marginTop: '12em', marginBottom: '3em' }}>
 			<Grid
 				container
 				direction="row"
