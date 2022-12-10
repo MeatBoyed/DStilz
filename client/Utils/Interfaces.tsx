@@ -125,6 +125,10 @@ export interface InfoCardProps {
 	body: string;
 }
 
+export interface ImageViewerProps {
+	images: [ImageObject];
+}
+
 export interface ViewMoreSectionData {
 	data: [ProductCardData];
 }
