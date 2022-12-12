@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { InfoCardProps } from '../Interfaces';
+import { InfoCardProps } from '../../Interfaces';
 
 export const InfoCard: NextPage<InfoCardProps> = ({ icon, header, body }) => {
 	return (

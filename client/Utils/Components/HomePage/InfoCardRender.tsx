@@ -2,8 +2,8 @@ import type { NextPage } from 'next';
 
 import Grid from '@mui/material/Grid';
 
-import CarSale from '../../public/CarSales.png';
-import { InfoCard } from '..';
+import CarSale from '../../../public/CarSales.png';
+import { InfoCard } from '../..';
 
 export const InfoCardRender: NextPage = () => {
 	return (

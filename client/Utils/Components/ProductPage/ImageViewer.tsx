@@ -10,8 +10,8 @@ import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 
 // Utils
-import { ImageViewerProps } from '../../Utils/Interfaces';
-import productCardImage from '../../public/ProductCard.jpg';
+import { ImageViewerProps } from '../../Interfaces';
+import productCardImage from '../../../public/ProductCard.jpg';
 
 export const ImageViewer: NextPage<ImageViewerProps> = ({ images }) => {
 	const [index, setIndex] = useState<number>(0);

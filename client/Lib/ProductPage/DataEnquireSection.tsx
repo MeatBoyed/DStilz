@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 
 import { DataTableProps } from '../../Utils/Interfaces';
 import { DataTableTable } from '../../Utils';
-import EnquireCard from '../../Utils/Components/EnquireCard';
+import EnquireCard from '../../Utils/Components/ProductPage/EnquireCard';
 
 const DataForTable = [
 	{ title: 'Vehicle Details', data: '' },

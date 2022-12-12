@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-export const EnquireSection: NextPage = () => {
+export const EnquireCard: NextPage = () => {
 	return (
 		<Paper
 			elevation={12}
@@ -149,4 +149,4 @@ export const EnquireSection: NextPage = () => {
 	);
 };
 
-export default EnquireSection;
+export default EnquireCard;

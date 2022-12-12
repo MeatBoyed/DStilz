@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import { DataViewerTableProps } from '../Interfaces';
+import { DataViewerTableProps } from '../../Interfaces';
 
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';

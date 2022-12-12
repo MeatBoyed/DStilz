@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 
 import { SearchBox } from '../../Utils';
 const InfoCardRender = dynamic(
-	() => import('../../Utils/Components/InfoCardRender')
+	() => import('../../Utils/Components/HomePage/InfoCardRender')
 );
 
 export const SearchBoxSection: NextPage = () => {
