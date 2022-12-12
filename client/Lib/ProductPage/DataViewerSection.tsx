@@ -12,6 +12,17 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 // Utils
 import { DataViewerTable, ImageViewer } from '../../Utils';
 import { DataViewerSectionProps } from '../../Utils/Interfaces';
+import Modal from '@mui/material/Modal';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
+import {
+	Checkbox,
+	FormControlLabel,
+	IconButton,
+	Radio,
+	RadioGroup,
+	TextField,
+} from '@mui/material';
 
 export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 	make,
@@ -23,8 +34,7 @@ export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 	bodyType,
 	images,
 }) => {
-	const [index, setIndex] = useState<number>(0);
-
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 	return (
 		<Container sx={{ marginTop: '3em', marginBottom: '3em' }}>
 			<Grid
@@ -59,6 +69,7 @@ export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 									fontSize: '1em',
 									bgcolor: '#F47920',
 								}}
+								onClick={() => setIsOpen(true)}
 							>
 								Enquire Now
 							</Button>

@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 
 import { DataTableProps } from '../../Utils/Interfaces';
 import { DataTableTable } from '../../Utils';
+import EnquireCard from '../../Utils/Components/EnquireCard';
 
 const DataForTable = [
 	{ title: 'Vehicle Details', data: '' },
@@ -35,14 +36,15 @@ export const DataTableSection: NextPage<DataTableProps> = ({
 	maximumTopSpeed,
 }) => {
 	return (
-		<Container sx={{ marginTop: '12em', marginBottom: '3em' }}>
+		<Container sx={{ marginTop: '5em', marginBottom: '3em' }}>
 			<Grid
 				container
-				direction="row"
+				alignItems="flex-start"
+				spacing={{ sm: 8, xs: 4 }}
 				justifyContent="center"
-				sx={{ width: '100%' }}
+				sx={{ width: '100%', height: '100%' }}
 			>
-				<Grid item xs={12}>
+				<Grid item xs={true} width="100%">
 					<DataTableTable
 						previousOwners={previousOwners}
 						engineDetail={engineDetail}
@@ -53,6 +55,9 @@ export const DataTableSection: NextPage<DataTableProps> = ({
 						acceleration={acceleration}
 						maximumTopSpeed={maximumTopSpeed}
 					/>
+				</Grid>
+				<Grid item>
+					<EnquireCard />
 				</Grid>
 			</Grid>
 		</Container>

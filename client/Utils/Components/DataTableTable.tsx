@@ -24,7 +24,7 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 	acceleration,
 	maximumTopSpeed,
 }) => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isOpen, setIsOpen] = useState<boolean>(true);
 	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ width: '100%', bgcolor: '#1B2935', color: '#ffff' }}>

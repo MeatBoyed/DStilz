@@ -14,13 +14,18 @@ import {
 } from '../../Utils/Interfaces';
 
 // UI Components
-import { HeaderSection, DataViewerSection } from '../../Lib/ProductPage';
+import {
+	HeaderSection,
+	DataViewerSection,
+	EnquireSection,
+} from '../../Lib/ProductPage';
+import Grid from '@mui/material/Grid';
 
 const RecommendSection = dynamic(
 	() => import('../../Lib/ProductPage/RecommendSection')
 );
 const DataTableSection = dynamic(
-	() => import('../../Lib/ProductPage/DataTableSection')
+	() => import('../../Lib/ProductPage/DataEnquireSection')
 );
 
 export const ProductPage: NextPage = (
