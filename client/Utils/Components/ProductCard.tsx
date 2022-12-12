@@ -28,7 +28,8 @@ interface props {
 
 export const ProductCard: NextPage<props> = ({ product }) => {
 	const router = useRouter();
-	const ProductURL = `/car/${encodeURIComponent(product.slug.current)}`;
+	// const ProductURL = `/car/${encodeURIComponent(product.slug.current)}`;
+	const ProductURL = 'aksdjkas';
 	return (
 		<Grid item>
 			<Card sx={{ width: '256px' }}>

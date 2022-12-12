@@ -9,11 +9,13 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { Price } from '../../Utils';
 import { HeaderSectionProps } from '../../Utils/Interfaces';
+import { useRouter } from 'next/router';
 
 export const HeaderSection: NextPage<HeaderSectionProps> = ({
 	title,
 	price,
 }) => {
+	const router = useRouter();
 	return (
 		<Container sx={{ marginTop: '3em', marginBottom: '3em' }}>
 			{/* Button hover colour */}
@@ -21,6 +23,7 @@ export const HeaderSection: NextPage<HeaderSectionProps> = ({
 				startIcon={<ChevronLeftIcon />}
 				variant="contained"
 				sx={{ backgroundColor: '#72797E' }}
+				onClick={() => router.back()}
 			>
 				Back To Search
 			</Button>
