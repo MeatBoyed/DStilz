@@ -1,6 +1,4 @@
 export { default as Theme } from './Theme';
-export { SanityClient } from './SanityClient';
-export { imageBuilder } from './SanityClient';
 export { default as Price } from './Components/Price';
 export { default as Navbar } from './Components/Navbar';
 export { default as Footer } from './Components/Footer';

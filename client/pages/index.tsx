@@ -4,21 +4,57 @@ import { Container, Grid } from '@mui/material';
 import type { GetStaticProps, NextPage } from 'next';
 // import styles from '../styles/Home.module.css';
 
-import {
-	BannerSection,
-	CategoriesSection,
-	SearchBoxSection,
-} from '../Lib/HomePage';
+import { BannerSection, SearchBoxSection } from '../Lib/HomePage';
 const ViewMoreSection = dynamic(
 	() => import('../Lib/HomePage/ViewMoreSection')
 );
 const AboutSection = dynamic(() => import('../Lib/HomePage/AboutSection'));
 
-import { SanityClient } from '../Utils';
-import { ViewMoreSectionData } from '../Utils/Interfaces';
+import { ProductCardData, ViewMoreSectionData } from '../Utils/Interfaces';
 
 // Error handling for no Internet
-const Home: NextPage<ViewMoreSectionData> = ({ data }) => {
+const Home: NextPage = () => {
+	const Data: [ViewMoreSectionData] = [
+		{
+			data: [
+				{
+					slug: { _type: 'product', current: 'kdjsfkjasfdk' },
+					thumbnail: {
+						_key: 'askdja',
+						_type: 'image',
+						asset: { _ref: 'iad', _type: 'asdkjasd' },
+					},
+					title: 'Mercedes A250 AMG',
+					make: 'Mercedes',
+					model: 'A250',
+					registrationYear: '2018',
+					price: 650000,
+					milage: 150000,
+					fuelType: 'Petrol',
+					transmission: 'Automatic',
+				},
+			],
+		},
+	];
+
+	const prodData: [ProductCardData] = [
+		{
+			slug: { _type: 'product', current: 'kdjsfkjasfdk' },
+			thumbnail: {
+				_key: 'askdja',
+				_type: 'image',
+				asset: { _ref: 'iad', _type: 'asdkjasd' },
+			},
+			title: 'Mercedes A250 AMG',
+			make: 'Mercedes',
+			model: 'A250',
+			registrationYear: '2018',
+			price: 650000,
+			milage: 150000,
+			fuelType: 'Petrol',
+			transmission: 'Automatic',
+		},
+	];
 	return (
 		<Container id="HomePage" maxWidth={false} disableGutters={true}>
 			<Grid
@@ -37,7 +73,7 @@ const Home: NextPage<ViewMoreSectionData> = ({ data }) => {
 					<AboutSection />
 				</Grid>
 				<Grid item sx={{ width: '100%' }}>
-					<ViewMoreSection data={data} />
+					<ViewMoreSection data={prodData} />
 				</Grid>
 
 				<Grid item>
@@ -48,14 +84,14 @@ const Home: NextPage<ViewMoreSectionData> = ({ data }) => {
 	);
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-	const query =
-		'*[_type == "product"]{slug,title,price,make,series,model,registrationYear,milage,transmission,fuelType,thumbnail}';
-	const res: [ViewMoreSectionData] = await SanityClient.fetch(query);
+// export const getStaticProps: GetStaticProps = async () => {
+// 	const query =
+// 		'*[_type == "product"]{slug,title,price,make,series,model,registrationYear,milage,transmission,fuelType,thumbnail}';
+// 	const res: [ViewMoreSectionData] = await SanityClient.fetch(query);
 
-	return {
-		props: { data: res },
-	};
-};
+// 	return {
+// 		props: { data: res },
+// 	};
+// };
 
 export default Home;

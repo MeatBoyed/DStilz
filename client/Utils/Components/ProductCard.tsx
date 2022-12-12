@@ -1,23 +1,26 @@
+// Next & React
 import React from 'react';
-import type { NextPage } from 'next';
-
-import { ProductCardData } from '../Interfaces';
-
-import Card from '@mui/material/Card';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Link as MUILink } from '@mui/material';
+import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
+
+// MUI
+import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import CardContent from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
+import { Link as MUILink } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-import { Price, imageBuilder } from '..';
-import { useRouter } from 'next/router';
+// Utils
+import { Price } from '..';
+import { ProductCardData } from '../Interfaces';
+import thumbnail from '../../public/ProductCard.jpg';
 
 interface props {
 	product: ProductCardData;
@@ -30,7 +33,7 @@ export const ProductCard: NextPage<props> = ({ product }) => {
 		<Grid item>
 			<Card sx={{ width: '256px' }}>
 				<Image
-					src={imageBuilder(product.thumbnail, 250, 250)}
+					src={thumbnail.src}
 					layout="responsive"
 					height={250}
 					width={250}

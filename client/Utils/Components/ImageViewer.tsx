@@ -11,7 +11,7 @@ import ChevronRight from '@mui/icons-material/ChevronRight';
 
 // Utils
 import { ImageViewerProps } from '../../Utils/Interfaces';
-import { imageBuilder } from '../../Utils';
+import productCardImage from '../../public/ProductCard.jpg';
 
 export const ImageViewer: NextPage<ImageViewerProps> = ({ images }) => {
 	const [index, setIndex] = useState<number>(0);
@@ -21,7 +21,7 @@ export const ImageViewer: NextPage<ImageViewerProps> = ({ images }) => {
 		<Grid container>
 			<Grid item>
 				<Image
-					src={imageBuilder(images[index], 800, 600)}
+					src={productCardImage.src}
 					alt="main"
 					width={800}
 					height={600}
