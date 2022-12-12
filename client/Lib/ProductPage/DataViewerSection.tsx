@@ -1,17 +1,17 @@
+// Next
+import { useState } from 'react';
 import type { NextPage } from 'next';
-import Image from 'next/image';
 
+// MUI
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-
-import { DataViewerTable, ImageViewer } from '../../Utils';
-
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+// Utils
+import { DataViewerTable, ImageViewer } from '../../Utils';
 import { DataViewerSectionProps } from '../../Utils/Interfaces';
-import { useState } from 'react';
-import { imageBuilder } from '../../Utils';
 
 export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 	make,
@@ -33,7 +33,7 @@ export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 				spacing={{ sm: 4, xs: 4 }}
 				justifyContent="space-between"
 			>
-				<Grid item xs={6}>
+				<Grid item xs={6} width="100%" height="100%">
 					<ImageViewer images={images} />
 				</Grid>
 				<Grid item xs={5} container direction="column" spacing={2}>
