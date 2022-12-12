@@ -24,7 +24,6 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 	acceleration,
 	maximumTopSpeed,
 }) => {
-	const [isOpen, setIsOpen] = useState<boolean>(true);
 	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ width: '100%', bgcolor: '#1B2935', color: '#ffff' }}>
@@ -47,123 +46,112 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 							scope="row"
 							align="right"
 							sx={{ color: '#ffff' }}
+						></TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Previous Owners
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
 						>
-							<IconButton
-								aria-label="DropDownIcon"
-								onClick={() => setIsOpen(!isOpen)}
-							>
-								<ExpandMore fontSize="large" sx={{ fill: 'white' }} />
-							</IconButton>
+							{previousOwners}
 						</TableCell>
 					</TableRow>
-					{isOpen && (
-						<React.Fragment>
-							<TableRow>
-								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-									Previous Owners
-								</TableCell>
-								<TableCell
-									component="th"
-									scope="row"
-									align="right"
-									sx={{ color: '#ffff' }}
-								>
-									{previousOwners}
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-									Engine Details:
-								</TableCell>
-								<TableCell
-									component="th"
-									scope="row"
-									align="right"
-									sx={{ color: '#ffff' }}
-								>
-									{engineDetail}
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-									Engine Capacity:
-								</TableCell>
-								<TableCell
-									component="th"
-									scope="row"
-									align="right"
-									sx={{ color: '#ffff' }}
-								>
-									{engineCapacity} L
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-									Cylinder Layout:
-								</TableCell>
-								<TableCell
-									component="th"
-									scope="row"
-									align="right"
-									sx={{ color: '#ffff' }}
-								>
-									{cylinderLayoutQuantity}
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-									Fuel Type:
-								</TableCell>
-								<TableCell
-									component="th"
-									scope="row"
-									align="right"
-									sx={{ color: '#ffff' }}
-								>
-									{fuelType}
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-									Fuel Capacity:
-								</TableCell>
-								<TableCell
-									component="th"
-									scope="row"
-									align="right"
-									sx={{ color: '#ffff' }}
-								>
-									{fuelCapacity} L
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-									Acceleration
-								</TableCell>
-								<TableCell
-									component="th"
-									scope="row"
-									align="right"
-									sx={{ color: '#ffff' }}
-								>
-									{acceleration} s
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-									Maximum Top Speed:
-								</TableCell>
-								<TableCell
-									component="th"
-									scope="row"
-									align="right"
-									sx={{ color: '#ffff' }}
-								>
-									{maximumTopSpeed} Km/h
-								</TableCell>
-							</TableRow>
-						</React.Fragment>
-					)}
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Engine Details:
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
+						>
+							{engineDetail}
+						</TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Engine Capacity:
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
+						>
+							{engineCapacity} L
+						</TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Cylinder Layout:
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
+						>
+							{cylinderLayoutQuantity}
+						</TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Fuel Type:
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
+						>
+							{fuelType}
+						</TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Fuel Capacity:
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
+						>
+							{fuelCapacity} L
+						</TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Acceleration
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
+						>
+							{acceleration} s
+						</TableCell>
+					</TableRow>
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Maximum Top Speed:
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
+						>
+							{maximumTopSpeed} Km/h
+						</TableCell>
+					</TableRow>
 				</TableBody>
 			</Table>
 		</TableContainer>
