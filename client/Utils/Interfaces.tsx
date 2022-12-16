@@ -1,3 +1,4 @@
+import { ProductCard } from '@prisma/client';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface CategoryCardProps {
@@ -130,9 +131,13 @@ export interface ImageViewerProps {
 }
 
 export interface ViewMoreSectionData {
-	data: [ProductCardData];
+	data: [ProductCard];
 }
 
 export interface CarPageContext extends ParsedUrlQuery {
 	slug: string;
+}
+
+export interface ProductCardProps {
+	product: ProductCard;
 }

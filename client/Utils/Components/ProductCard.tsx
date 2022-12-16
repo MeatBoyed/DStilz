@@ -10,7 +10,6 @@ import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import CardContent from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import { Link as MUILink } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -19,14 +18,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 // Utils
 import { Price } from '..';
-import { ProductCardData } from '../Interfaces';
+import { ProductCardData, ProductCardProps } from '../Interfaces';
 import thumbnail from '../../public/ProductCard.jpg';
 
-interface props {
-	product: ProductCardData;
-}
-
-export const ProductCard: NextPage<props> = ({ product }) => {
+export const ProductCard: NextPage<ProductCardProps> = ({ product }) => {
 	const router = useRouter();
 	// const ProductURL = `/car/${encodeURIComponent(product.slug.current)}`;
 	const ProductURL = 'aksdjkas';

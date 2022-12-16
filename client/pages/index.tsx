@@ -1,60 +1,27 @@
+// NEXT & Prisma
 import dynamic from 'next/dynamic';
-
-import { Container, Grid } from '@mui/material';
+import { ProductCard } from '@prisma/client';
+import prisma from '../Utils/prisma';
 import type { GetStaticProps, NextPage } from 'next';
+
+// MUI
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 // import styles from '../styles/Home.module.css';
 
+// Utils
 import { BannerSection, SearchBoxSection } from '../Lib/HomePage';
 const ViewMoreSection = dynamic(
 	() => import('../Lib/HomePage/ViewMoreSection')
 );
 const AboutSection = dynamic(() => import('../Lib/HomePage/AboutSection'));
-
 import { ProductCardData, ViewMoreSectionData } from '../Utils/Interfaces';
 
+interface props {
+	data: [ProductCard];
+}
 // Error handling for no Internet
-const Home: NextPage = () => {
-	const Data: [ViewMoreSectionData] = [
-		{
-			data: [
-				{
-					slug: { _type: 'product', current: 'kdjsfkjasfdk' },
-					thumbnail: {
-						_key: 'askdja',
-						_type: 'image',
-						asset: { _ref: 'iad', _type: 'asdkjasd' },
-					},
-					title: 'Mercedes A250 AMG',
-					make: 'Mercedes',
-					model: 'A250',
-					registrationYear: '2018',
-					price: 650000,
-					milage: 150000,
-					fuelType: 'Petrol',
-					transmission: 'Automatic',
-				},
-			],
-		},
-	];
-
-	const prodData: [ProductCardData] = [
-		{
-			slug: { _type: 'product', current: 'kdjsfkjasfdk' },
-			thumbnail: {
-				_key: 'askdja',
-				_type: 'image',
-				asset: { _ref: 'iad', _type: 'asdkjasd' },
-			},
-			title: 'Mercedes A250 AMG',
-			make: 'Mercedes',
-			model: 'A250',
-			registrationYear: '2018',
-			price: 650000,
-			milage: 150000,
-			fuelType: 'Petrol',
-			transmission: 'Automatic',
-		},
-	];
+const Home: NextPage<props> = ({ data }) => {
 	return (
 		<Container id="HomePage" maxWidth={false} disableGutters={true}>
 			<Grid
@@ -73,7 +40,7 @@ const Home: NextPage = () => {
 					<AboutSection />
 				</Grid>
 				<Grid item sx={{ width: '100%' }}>
-					<ViewMoreSection data={prodData} />
+					<ViewMoreSection data={data} />
 				</Grid>
 
 				<Grid item>
@@ -84,14 +51,12 @@ const Home: NextPage = () => {
 	);
 };
 
-// export const getStaticProps: GetStaticProps = async () => {
-// 	const query =
-// 		'*[_type == "product"]{slug,title,price,make,series,model,registrationYear,milage,transmission,fuelType,thumbnail}';
-// 	const res: [ViewMoreSectionData] = await SanityClient.fetch(query);
+export const getStaticProps: GetStaticProps = async () => {
+	const data = await prisma.productCard.findMany();
 
-// 	return {
-// 		props: { data: res },
-// 	};
-// };
+	return {
+		props: { data: data },
+	};
+};
 
 export default Home;

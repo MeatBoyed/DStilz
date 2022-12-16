@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ProductCard {
+  id               String @id @default(cuid())
+  title            String
+  make             String
+  model            String
+  registrationYear Int
+  price            Int
+  milage           Int
+  fuelType         String
+  transmission     String
+}
