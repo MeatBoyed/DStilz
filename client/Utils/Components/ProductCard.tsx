@@ -18,21 +18,31 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 // Utils
 import { Price } from '..';
-import { ProductCardData, ProductCardProps } from '../Interfaces';
 import thumbnail from '../../public/ProductCard.jpg';
+import { Vehicle } from '@prisma/client';
 
-export const ProductCard: NextPage<ProductCardProps> = ({ product }) => {
+interface props {
+	product: Vehicle;
+}
+
+export const ProductCard: NextPage<props> = ({ product }) => {
 	const router = useRouter();
-	// const ProductURL = `/car/${encodeURIComponent(product.slug.current)}`;
-	const ProductURL = 'aksdjkas';
+
+	// URL Masking
+	const ProductURL = `/car/${product.id}`;
 	return (
 		<Grid item>
-			<Card sx={{ width: '256px' }}>
+			<Card
+				sx={{
+					width: '256px',
+				}}
+			>
 				<Image
-					src={thumbnail.src}
+					src={product.images[0]}
 					layout="responsive"
-					height={250}
+					objectFit="fill"
 					width={250}
+					height={200}
 					onClick={() => router.push(ProductURL)}
 					alt={`${product.title} Thumbnail`}
 				/>
@@ -48,7 +58,7 @@ export const ProductCard: NextPage<ProductCardProps> = ({ product }) => {
 								<MUILink
 									variant="h6"
 									underline="none"
-									sx={{ color: 'black', cursor: 'pointer', fontSize: '1em' }}
+									sx={{ color: 'black', cursor: 'pointer', fontSize: '.89em' }}
 								>
 									{product.title}
 								</MUILink>
@@ -61,10 +71,8 @@ export const ProductCard: NextPage<ProductCardProps> = ({ product }) => {
 							<Price price={product.price} />
 						</Grid>
 						<Grid item>
-							<Typography>Year: {product.registrationYear}</Typography>
+							<Typography>Year: {product.year}</Typography>
 							<Typography>Milage: {product.milage} km</Typography>
-							<Typography>Fuel Type: {product.fuelType}</Typography>
-							<Typography>Transmission: {product.transmission}</Typography>
 						</Grid>
 					</Grid>
 				</CardContent>

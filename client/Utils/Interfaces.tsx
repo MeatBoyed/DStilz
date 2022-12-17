@@ -1,4 +1,4 @@
-import { ProductCard } from '@prisma/client';
+import { Vehicle } from '@prisma/client';
 import { ParsedUrlQuery } from 'querystring';
 
 export interface CategoryCardProps {
@@ -15,19 +15,6 @@ export interface Slug {
 export interface ElevationScrollProp {
 	window?: () => Window;
 	children: React.ReactElement;
-}
-
-export interface ProductCardData {
-	slug: Slug;
-	title: string;
-	thumbnail: ImageObject;
-	make: string;
-	model: string;
-	registrationYear: string;
-	price: number;
-	milage: number;
-	fuelType: string;
-	transmission: string;
 }
 
 export interface PriceProps {
@@ -130,14 +117,10 @@ export interface ImageViewerProps {
 	images: [ImageObject];
 }
 
-export interface ViewMoreSectionData {
-	data: [ProductCard];
-}
-
 export interface CarPageContext extends ParsedUrlQuery {
 	slug: string;
 }
 
 export interface ProductCardProps {
-	product: ProductCard;
+	product: Vehicle;
 }

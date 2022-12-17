@@ -1,4 +1,6 @@
-import type { NextPage } from 'next';
+import prisma from '../../Utils/prisma';
+import { Vehicle } from '@prisma/client';
+import type { GetStaticProps, NextPage } from 'next';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -7,9 +9,11 @@ import Typography from '@mui/material/Typography';
 
 import { ProductCard } from '../../Utils';
 
-import { ViewMoreSectionData } from '../../Utils/Interfaces';
+interface props {
+	data: [Vehicle];
+}
 
-export const ViewMoreSection: NextPage<ViewMoreSectionData> = ({ data }) => {
+export const ViewMoreSection: NextPage<props> = ({ data }) => {
 	return (
 		<Container
 			maxWidth={false}

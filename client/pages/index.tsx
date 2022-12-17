@@ -1,7 +1,5 @@
 // NEXT & Prisma
 import dynamic from 'next/dynamic';
-import { ProductCard } from '@prisma/client';
-import prisma from '../Utils/prisma';
 import type { GetStaticProps, NextPage } from 'next';
 
 // MUI
@@ -11,14 +9,15 @@ import Grid from '@mui/material/Grid';
 
 // Utils
 import { BannerSection, SearchBoxSection } from '../Lib/HomePage';
+import { Vehicle } from '@prisma/client';
+import prisma from '../Utils/prisma';
 const ViewMoreSection = dynamic(
 	() => import('../Lib/HomePage/ViewMoreSection')
 );
 const AboutSection = dynamic(() => import('../Lib/HomePage/AboutSection'));
-import { ProductCardData, ViewMoreSectionData } from '../Utils/Interfaces';
 
 interface props {
-	data: [ProductCard];
+	data: [Vehicle];
 }
 // Error handling for no Internet
 const Home: NextPage<props> = ({ data }) => {
@@ -52,7 +51,7 @@ const Home: NextPage<props> = ({ data }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await prisma.productCard.findMany();
+	const data = await prisma.vehicle.findMany();
 
 	return {
 		props: { data: data },

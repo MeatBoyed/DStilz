@@ -7,14 +7,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ProductCard {
-  id               String @id @default(cuid())
-  title            String
-  make             String
-  model            String
-  registrationYear Int
-  price            Int
-  milage           Int
-  fuelType         String
-  transmission     String
+model Vehicle {
+  id            String         @id @default(cuid())
+  title         String
+  make          String
+  model         String
+  variant       String
+  year          Int
+  milage        Int
+  price         Float
+  color         String
+  bodyType      String
+  images        String[]
+  features      String[]
+  metaData      MetaData?
+  specification Specification?
+}
+
+model MetaData {
+  id           String  @id @default(cuid())
+  vehicleId    String  @unique
+  stockCode    Int
+  mmCode       Int
+  vinNumber    Int
+  liceneNumber String
+  vehicle      Vehicle @relation(fields: [vehicleId], references: [id])
+}
+
+model Specification {
+  id             String  @id @default(cuid())
+  vehicleId      String  @unique
+  engineDetails  String
+  engineCapacity Float
+  cylinderLayout String
+  fuelType       String
+  fuelCapacity   Int
+  acceleration   Float
+  topSpeed       Int
+  transmission   String
+  previousOwners Int
+  serviceHistory String
+  accidents      Int
+  spareKey       Boolean
+  vehicle        Vehicle @relation(fields: [vehicleId], references: [id])
 }
