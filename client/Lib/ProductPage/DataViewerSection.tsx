@@ -12,6 +12,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 // Utils
 import { DataViewerTable, ImageViewer } from '../../Utils';
 import { Vehicle } from '@prisma/client';
+import WhatsAppMed from '../../public/WhatsAppMed.svg';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 interface props {
 	vehicle: Vehicle;
@@ -24,6 +27,7 @@ export const DataViewerSection: NextPage<props> = ({
 	transmission,
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const router = useRouter();
 	return (
 		<Container sx={{ marginTop: '3em', marginBottom: '3em' }}>
 			<Grid
@@ -63,6 +67,30 @@ export const DataViewerSection: NextPage<props> = ({
 							>
 								Enquire Now
 							</Button>
+							<Button
+								variant="contained"
+								startIcon={
+									<Image
+										width={30}
+										height={30}
+										objectFit="fill"
+										src={WhatsAppMed.src}
+									/>
+								}
+								sx={{
+									fontSize: '1em',
+									justifyContent: 'center',
+									backgroundColor: '#25D366',
+								}}
+								onClick={() =>
+									router.push(
+										`https://wa.me/270656853805?text=I'm%20interested%20in%20your%20car%20for%20sale`
+									)
+								}
+							>
+								Chat on WhatsApp
+							</Button>
+
 							<Button
 								variant="contained"
 								endIcon={<ChevronRightIcon />}

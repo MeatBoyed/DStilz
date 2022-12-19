@@ -65,11 +65,6 @@ export interface ProductData {
 	maximumTopSpeed: number;
 }
 
-export interface ProductPageProps {
-	recommendedData: [ProductCardData];
-	productData: ProductData;
-}
-
 export interface DataViewerSectionProps {
 	make: string;
 	series: string;
