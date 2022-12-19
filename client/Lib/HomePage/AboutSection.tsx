@@ -34,7 +34,7 @@ export const AboutSection: NextPage = () => {
 							Welcome To
 						</Typography>
 						<Typography variant="h5" align="center" sx={{ fontSize: '4em' }}>
-							DASAuto
+							Dstilez Auto
 						</Typography>
 					</Grid>
 					<Grid item>
