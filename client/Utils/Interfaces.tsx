@@ -80,15 +80,6 @@ export interface DataViewerSectionProps {
 	transmission: string;
 	images: [ImageObject];
 }
-export interface DataViewerTableProps {
-	make: string;
-	series: string;
-	model: string;
-	registrationYear: number;
-	milage: number;
-	bodyType: string;
-	transmission: string;
-}
 
 export interface DataTableProps {
 	previousOwners: number;

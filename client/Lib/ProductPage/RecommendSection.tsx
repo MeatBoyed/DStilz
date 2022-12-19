@@ -5,10 +5,13 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 import ProductCard from '../../Utils/Components/ProductCard';
+import { Vehicle } from '@prisma/client';
 
-import { ViewMoreSectionData } from '../../Utils/Interfaces';
+interface props {
+	data: [Vehicle];
+}
 
-export const RecommendSection: NextPage<ViewMoreSectionData> = ({ data }) => {
+export const RecommendSection: NextPage<props> = ({ data }) => {
 	return (
 		<Container sx={{ marginTop: '6em', marginBottom: '10em' }}>
 			<Typography

@@ -1,28 +1,34 @@
 import type { NextPage } from 'next';
 
-import { DataTableProps } from '../../Interfaces';
-
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import IconButton from '@mui/material/IconButton';
 
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import { useState } from 'react';
 import React from 'react';
 
-export const DataTableTable: NextPage<DataTableProps> = ({
+interface props {
+	previousOwners: number;
+	engineDetails: string;
+	engineCapacity: number;
+	cylinderLayout: string;
+	fuelType: string;
+	fuelCapacity: number;
+	acceleration: number;
+	topSpeed: number;
+}
+
+export const DataTableTable: NextPage<props> = ({
 	previousOwners,
 	engineCapacity,
-	engineDetail,
-	cylinderLayoutQuantity,
+	engineDetails,
+	cylinderLayout,
 	fuelType,
 	fuelCapacity,
 	acceleration,
-	maximumTopSpeed,
+	topSpeed,
 }) => {
 	return (
 		<TableContainer component={Paper}>
@@ -71,7 +77,7 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{engineDetail}
+							{engineDetails}
 						</TableCell>
 					</TableRow>
 					<TableRow>
@@ -97,7 +103,7 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{cylinderLayoutQuantity}
+							{cylinderLayout}
 						</TableCell>
 					</TableRow>
 					<TableRow>
@@ -149,7 +155,7 @@ export const DataTableTable: NextPage<DataTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{maximumTopSpeed} Km/h
+							{topSpeed} Km/h
 						</TableCell>
 					</TableRow>
 				</TableBody>

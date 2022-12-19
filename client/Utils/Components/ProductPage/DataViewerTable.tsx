@@ -1,7 +1,5 @@
 import type { NextPage } from 'next';
 
-import { DataViewerTableProps } from '../../Interfaces';
-
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableRow from '@mui/material/TableRow';
@@ -9,14 +7,25 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 
-export const DataViewerTable: NextPage<DataViewerTableProps> = ({
+interface props {
+	make: string;
+	model: string;
+	variant: string;
+	year: number;
+	milage: number;
+	bodyType: string;
+	transmission: string;
+	features: string[];
+}
+export const DataViewerTable: NextPage<props> = ({
 	make,
-	series,
 	model,
-	registrationYear,
+	variant,
+	year,
 	milage,
 	transmission,
 	bodyType,
+	features,
 }) => {
 	return (
 		<TableContainer component={Paper}>
@@ -65,7 +74,7 @@ export const DataViewerTable: NextPage<DataViewerTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{series}
+							{variant}
 						</TableCell>
 					</TableRow>
 					<TableRow>
@@ -117,7 +126,7 @@ export const DataViewerTable: NextPage<DataViewerTableProps> = ({
 							align="right"
 							sx={{ color: '#ffff' }}
 						>
-							{registrationYear}
+							{year}
 						</TableCell>
 					</TableRow>
 					<TableRow>
@@ -132,6 +141,18 @@ export const DataViewerTable: NextPage<DataViewerTableProps> = ({
 						>
 							{bodyType}
 						</TableCell>
+					</TableRow>
+					{/* Render out list of features */}
+					<TableRow>
+						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+							Features:
+						</TableCell>
+						<TableCell
+							component="th"
+							scope="row"
+							align="right"
+							sx={{ color: '#ffff' }}
+						></TableCell>
 					</TableRow>
 				</TableBody>
 			</Table>

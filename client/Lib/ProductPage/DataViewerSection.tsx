@@ -11,28 +11,17 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 // Utils
 import { DataViewerTable, ImageViewer } from '../../Utils';
-import { DataViewerSectionProps } from '../../Utils/Interfaces';
-import Modal from '@mui/material/Modal';
-import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
-import {
-	Checkbox,
-	FormControlLabel,
-	IconButton,
-	Radio,
-	RadioGroup,
-	TextField,
-} from '@mui/material';
+import { Vehicle } from '@prisma/client';
 
-export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
-	make,
-	series,
-	model,
-	registrationYear,
-	milage,
+interface props {
+	vehicle: Vehicle;
+	transmission: string;
+}
+
+// TODO Decide wether to delete Enquire button, and opt to route to EnquireCard. Add functionality for Messaging Salesperson
+export const DataViewerSection: NextPage<props> = ({
+	vehicle,
 	transmission,
-	bodyType,
-	images,
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	return (
@@ -44,18 +33,19 @@ export const DataViewerSection: NextPage<DataViewerSectionProps> = ({
 				justifyContent="space-between"
 			>
 				<Grid item xs={6} width="100%" height="100%">
-					<ImageViewer images={images} />
+					<ImageViewer images={vehicle.images} />
 				</Grid>
 				<Grid item xs={5} container direction="column" spacing={2}>
 					<Grid item>
 						<DataViewerTable
-							make={make}
-							series={series}
-							model={model}
-							registrationYear={registrationYear}
-							milage={milage}
+							make={vehicle.make}
+							model={vehicle.model}
+							variant={vehicle.variant}
+							year={vehicle.year}
+							milage={vehicle.milage}
 							transmission={transmission}
-							bodyType={bodyType}
+							bodyType={vehicle.bodyType}
+							features={vehicle.features}
 						/>
 					</Grid>
 					<Grid item>

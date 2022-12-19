@@ -9,19 +9,20 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 
-// Utils
-import { ImageViewerProps } from '../../Interfaces';
-import productCardImage from '../../../public/ProductCard.jpg';
+interface props {
+	images: string[];
+}
 
-export const ImageViewer: NextPage<ImageViewerProps> = ({ images }) => {
+export const ImageViewer: NextPage<props> = ({ images }) => {
 	const [index, setIndex] = useState<number>(0);
 
 	return (
 		//   Display slideshow info (3/5)
+		// Preloader on downloading images
 		<Grid container>
 			<Grid item>
 				<Image
-					src={productCardImage.src}
+					src={images[index]}
 					alt="main"
 					width={800}
 					height={600}
