@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
-import { SearchBox } from '../../Utils';
+import { SearchBox, SearchMenu } from '../../Utils';
 const InfoCardRender = dynamic(
 	() => import('../../Utils/Components/HomePage/InfoCardRender')
 );
@@ -26,8 +26,9 @@ export const SearchBoxSection: NextPage = () => {
 					alignItems="center"
 					spacing={5}
 				>
-					<Grid item>
-						<SearchBox />
+					<Grid item sm={6}>
+						{/* <SearchBox /> */}
+						<SearchMenu />
 					</Grid>
 					<Grid item>
 						<InfoCardRender />

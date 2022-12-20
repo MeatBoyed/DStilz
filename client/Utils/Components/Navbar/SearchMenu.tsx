@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
@@ -171,6 +172,19 @@ export const SearchMenu: NextPage = () => {
 							</Select>
 						</MenuItem>
 					</MenuList>
+				</Grid>
+				<Grid item>
+					<Button
+						variant="contained"
+						size="large"
+						sx={{
+							backgroundColor: '#F33939',
+							':hover': { backgroundColor: '#F33939' },
+							marginBottom: '2em',
+						}}
+					>
+						Search 1 000 Cars
+					</Button>
 				</Grid>
 			</Grid>
 		</Paper>
