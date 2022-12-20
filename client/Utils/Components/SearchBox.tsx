@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-export const SearchMenu: NextPage = () => {
+export const SearchBox: NextPage = () => {
 	const Categories = [
 		{ make: 'Volkswagen', model: 'Citi', variant: '1.4i' },
 		{ make: 'Volkswagen', model: 'Polo', variant: '1.4' },
@@ -191,4 +191,4 @@ export const SearchMenu: NextPage = () => {
 	);
 };
 
-export default SearchMenu;
+export default SearchBox;

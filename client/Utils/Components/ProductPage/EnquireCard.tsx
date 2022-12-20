@@ -13,13 +13,20 @@ export const EnquireCard: NextPage = () => {
 	return (
 		<Paper
 			elevation={12}
-			sx={{ backgroundColor: '#1B2935', color: 'white', padding: '1em' }}
+			sx={{
+				backgroundColor: '#1B2935',
+				color: 'white',
+				padding: '1em',
+				width: '100%',
+				height: '100%',
+			}}
 		>
 			<Grid
 				container
 				direction="column"
 				justifyContent="center"
 				alignItems="center"
+				width="100%"
 			>
 				<Grid item sx={{ marginBottom: '1em' }}>
 					<Typography
@@ -35,13 +42,15 @@ export const EnquireCard: NextPage = () => {
 					justifyContent="center"
 					alignItems="center"
 					spacing={2}
+					width="100%"
 				>
-					<Grid item>
+					<Grid item width="100%">
 						<TextField
 							id="Name"
 							placeholder="Name"
 							variant="outlined"
 							type="text"
+							fullWidth
 							sx={{
 								color: 'white',
 								'& .MuiInputBase-root': {
@@ -54,7 +63,7 @@ export const EnquireCard: NextPage = () => {
 							}}
 						/>
 					</Grid>
-					<Grid item>
+					<Grid item width="100%">
 						<TextField
 							id="Surname"
 							placeholder="Surname"
@@ -73,7 +82,7 @@ export const EnquireCard: NextPage = () => {
 							}}
 						/>
 					</Grid>
-					<Grid item>
+					<Grid item width="100%">
 						<TextField
 							id="PhoneNumber"
 							placeholder="Phone Number"
@@ -92,7 +101,7 @@ export const EnquireCard: NextPage = () => {
 							}}
 						/>
 					</Grid>
-					<Grid item>
+					<Grid item width="100%">
 						<TextField
 							id="Email"
 							placeholder="Email"
@@ -117,14 +126,15 @@ export const EnquireCard: NextPage = () => {
 						direction="column"
 						alignItems="center"
 						justifyContent="center"
+						width="100%"
 					>
-						<Grid item>
+						<Grid item width="100%">
 							<FormControlLabel
 								control={<Checkbox defaultChecked={false} />}
 								label="Do you require finance?"
 							/>
 						</Grid>
-						<Grid item>
+						<Grid item width="100%">
 							<FormControlLabel
 								control={<Checkbox defaultChecked={false} />}
 								label="Will you be trading in?"

@@ -2,36 +2,24 @@ import type { NextPage } from 'next';
 
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { Price } from '../../Utils';
 import { HeaderSectionProps } from '../../Utils/Interfaces';
-import { useRouter } from 'next/router';
 
 export const HeaderSection: NextPage<HeaderSectionProps> = ({
 	title,
 	price,
 }) => {
-	const router = useRouter();
 	return (
-		<Container sx={{ marginTop: '3em', marginBottom: '3em' }}>
+		<Container sx={{ marginBottom: '3em' }}>
 			{/* Button hover colour */}
-			<Button
-				startIcon={<ChevronLeftIcon />}
-				variant="contained"
-				sx={{ backgroundColor: '#72797E' }}
-				onClick={() => router.back()}
-			>
-				Back To Search
-			</Button>
 			<Grid
 				container
-				direction="row"
-				justifyContent="space-between"
+				justifyContent={{ xs: 'center', sm: 'space-between' }}
 				alignItems="center"
+				rowSpacing={2}
 				sx={{
 					marginTop: '3em',
 					borderBottom: '1px solid grey',
@@ -39,7 +27,9 @@ export const HeaderSection: NextPage<HeaderSectionProps> = ({
 				}}
 			>
 				<Grid item>
-					<Typography variant="h5">{title}</Typography>
+					<Typography variant="h5" align="center">
+						{title}
+					</Typography>
 				</Grid>
 				<Grid item>
 					<Stack direction="row" spacing={2}>

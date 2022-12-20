@@ -21,7 +21,7 @@ import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 // Utils
 import Menu from './Menu';
-import { SearchMenu } from '../..';
+import { SearchBox } from '../..';
 import { ElevationScrollProp } from '../../Interfaces';
 
 const ElevationScroll = (props: ElevationScrollProp) => {
@@ -39,7 +39,7 @@ const ElevationScroll = (props: ElevationScrollProp) => {
 
 export const Navbar: NextPage = () => {
 	const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
-	const [searchIsOpen, setSearchIsOpen] = useState<boolean>(true);
+	const [searchIsOpen, setSearchIsOpen] = useState<boolean>(false);
 
 	const closeHandler = () => {
 		setMenuIsOpen(false);
@@ -127,7 +127,7 @@ export const Navbar: NextPage = () => {
 								)}
 								{searchIsOpen && (
 									<Grid item width="100%">
-										<SearchMenu />
+										<SearchBox />
 									</Grid>
 								)}
 								<Grid item>

@@ -1,11 +1,16 @@
+import dynamic from 'next/dynamic';
 import type { NextPage } from 'next';
+import { Specification } from '@prisma/client';
 
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
-import { DataTableTable } from '../../Utils';
-import EnquireCard from '../../Utils/Components/ProductPage/EnquireCard';
-import { Specification } from '@prisma/client';
+const SpecificationTable = dynamic(
+	() => import('../../Utils/Components/ProductPage/SpecificationTable')
+);
+const EnquireCard = dynamic(
+	() => import('../../Utils/Components/ProductPage/EnquireCard')
+);
 
 interface props {
 	specification: Specification;
@@ -13,7 +18,13 @@ interface props {
 
 export const DataEnquireSection: NextPage<props> = ({ specification }) => {
 	return (
-		<Container sx={{ marginTop: '5em', marginBottom: '3em' }}>
+		<Container
+			sx={{
+				marginTop: '6.4em',
+				marginBottom: '3em',
+			}}
+			id="Specification&EnquireSection"
+		>
 			<Grid
 				container
 				alignItems="flex-start"
@@ -22,7 +33,7 @@ export const DataEnquireSection: NextPage<props> = ({ specification }) => {
 				sx={{ width: '100%', height: '100%' }}
 			>
 				<Grid item xs={true} width="100%">
-					<DataTableTable
+					<SpecificationTable
 						previousOwners={specification.previousOwners}
 						engineDetails={specification.engineDetails}
 						engineCapacity={specification.engineCapacity}
@@ -33,7 +44,7 @@ export const DataEnquireSection: NextPage<props> = ({ specification }) => {
 						topSpeed={specification.topSpeed}
 					/>
 				</Grid>
-				<Grid item>
+				<Grid item id="EnquireCard">
 					<EnquireCard />
 				</Grid>
 			</Grid>

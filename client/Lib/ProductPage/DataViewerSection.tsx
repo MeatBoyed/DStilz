@@ -26,10 +26,9 @@ export const DataViewerSection: NextPage<props> = ({
 	vehicle,
 	transmission,
 }) => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const router = useRouter();
 	return (
-		<Container sx={{ marginTop: '3em', marginBottom: '3em' }}>
+		<Container sx={{ marginTop: '3em' }}>
 			<Grid
 				container
 				direction={{ md: 'row', sm: 'column', xs: 'column' }}
@@ -63,7 +62,7 @@ export const DataViewerSection: NextPage<props> = ({
 									fontSize: '1em',
 									bgcolor: '#F47920',
 								}}
-								onClick={() => setIsOpen(true)}
+								onClick={() => router.push('#EnquireCard')}
 							>
 								Enquire Now
 							</Button>
@@ -79,7 +78,7 @@ export const DataViewerSection: NextPage<props> = ({
 								}
 								sx={{
 									fontSize: '1em',
-									justifyContent: 'center',
+									justifyContent: 'flex-start',
 									backgroundColor: '#25D366',
 								}}
 								onClick={() =>
@@ -88,21 +87,7 @@ export const DataViewerSection: NextPage<props> = ({
 									)
 								}
 							>
-								Chat on WhatsApp
-							</Button>
-
-							<Button
-								variant="contained"
-								endIcon={<ChevronRightIcon />}
-								sx={{
-									height: '3.2em',
-									justifyContent: 'space-between',
-									fontSize: '1em',
-									bgcolor: '#444C53',
-									textTransform: 'none',
-								}}
-							>
-								Message Salesperson
+								Enquire on WhatsApp
 							</Button>
 						</Stack>
 					</Grid>

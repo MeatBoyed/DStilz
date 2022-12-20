@@ -1,6 +1,6 @@
 import prisma from '../../Utils/prisma';
 import { Vehicle } from '@prisma/client';
-import type { GetStaticProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';

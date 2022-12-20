@@ -20,7 +20,7 @@ interface props {
 	topSpeed: number;
 }
 
-export const DataTableTable: NextPage<props> = ({
+export const SpecificationTable: NextPage<props> = ({
 	previousOwners,
 	engineCapacity,
 	engineDetails,
@@ -45,7 +45,7 @@ export const DataTableTable: NextPage<props> = ({
 								fontWeight: '600',
 							}}
 						>
-							Vehicle Details
+							Vehicle Specifications
 						</TableCell>
 						<TableCell
 							component="th"
@@ -164,4 +164,4 @@ export const DataTableTable: NextPage<props> = ({
 	);
 };
 
-export default DataTableTable;
+export default SpecificationTable;

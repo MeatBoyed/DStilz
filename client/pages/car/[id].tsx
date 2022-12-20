@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 // UI Components
 import { HeaderSection, DataViewerSection } from '../../Lib/ProductPage';
 import prisma from '../../Utils/prisma';
-import { Specification, Vehicle } from '@prisma/client';
+import { Vehicle } from '@prisma/client';
 
 const RecommendSection = dynamic(
 	() => import('../../Lib/ProductPage/RecommendSection')

@@ -19,7 +19,7 @@ export const ImageViewer: NextPage<props> = ({ images }) => {
 	return (
 		//   Display slideshow info (3/5)
 		// Preloader on downloading images
-		<Grid container>
+		<Grid container spacing={2}>
 			<Grid item>
 				<Image
 					src={images[index]}
@@ -35,6 +35,7 @@ export const ImageViewer: NextPage<props> = ({ images }) => {
 				direction="row"
 				justifyContent="center"
 				alignItems="center"
+				spacing={1}
 			>
 				<Grid item>
 					<IconButton
