@@ -29,7 +29,7 @@ export const ProductCard: NextPage<props> = ({ product }) => {
 	const router = useRouter();
 
 	// URL Masking
-	const ProductURL = `/car/${product.id}`;
+	const ProductURL = `/view-car/${product.id}`;
 	return (
 		<Grid item>
 			<Card
