@@ -1,5 +1,6 @@
 // NEXT & React
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import type { NextPage } from 'next';
 import { Fragment, cloneElement, useState } from 'react';
 
@@ -20,8 +21,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
 // Utils
-import Menu from './Menu';
-import { SearchBox } from '../..';
+const Menu = dynamic(() => import('./Menu'));
+const SearchBox = dynamic(() => import('../SearchBox'));
 import { ElevationScrollProp } from '../../Interfaces';
 
 const ElevationScroll = (props: ElevationScrollProp) => {
