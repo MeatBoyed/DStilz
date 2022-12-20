@@ -41,10 +41,6 @@ const Home: NextPage<props> = ({ data }) => {
 				<Grid item sx={{ width: '100%' }}>
 					<ViewMoreSection data={data} />
 				</Grid>
-
-				<Grid item>
-					<h1>Contact forum</h1>
-				</Grid>
 			</Grid>
 		</Container>
 	);
