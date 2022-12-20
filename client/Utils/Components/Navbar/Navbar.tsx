@@ -1,25 +1,28 @@
-import { Fragment, cloneElement, useState } from 'react';
+// NEXT & React
+import Link from 'next/link';
 import type { NextPage } from 'next';
+import { Fragment, cloneElement, useState } from 'react';
 
-import { ElevationScrollProp } from '../../Interfaces';
-
+// MUI
 import Grid from '@mui/material/Grid';
-import AppBar from '@mui/material/AppBar';
+import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import {
-	Link as MUILink,
-	MenuItem,
-	MenuList,
-	Paper,
-	Typography,
-} from '@mui/material';
+import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import CssBaseline from '@mui/material/CssBaseline';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
+
+// MUI Icons
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+
+// Utils
 import Menu from './Menu';
+import { SearchMenu } from '../..';
+import { ElevationScrollProp } from '../../Interfaces';
 
 const ElevationScroll = (props: ElevationScrollProp) => {
 	const { children, window } = props;
@@ -36,6 +39,24 @@ const ElevationScroll = (props: ElevationScrollProp) => {
 
 export const Navbar: NextPage = () => {
 	const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
+	const [searchIsOpen, setSearchIsOpen] = useState<boolean>(true);
+
+	const closeHandler = () => {
+		setMenuIsOpen(false);
+		setSearchIsOpen(false);
+	};
+
+	// Open Menu & Ensure Search is Closed
+	const openMenuHandler = () => {
+		setSearchIsOpen(false);
+		setMenuIsOpen(!menuIsOpen);
+	};
+
+	// Open Search & Ensure Menu is Closed
+	const openSearchHandler = () => {
+		setMenuIsOpen(false);
+		setSearchIsOpen(!searchIsOpen);
+	};
 
 	return (
 		<Fragment>
@@ -52,27 +73,81 @@ export const Navbar: NextPage = () => {
 							>
 								<Grid item>
 									<IconButton
-										size="large"
 										edge="start"
 										color="inherit"
 										aria-label="menu"
-										onClick={() => setMenuIsOpen(!menuIsOpen)}
+										onClick={openMenuHandler}
 									>
 										<MenuIcon />
 									</IconButton>
 								</Grid>
 								<Grid item>
-									<Typography variant="h6" component="div">
-										Dstilez Auto
-									</Typography>
+									<Link href="/">
+										<Typography variant="h6" component="div">
+											Dstilez Auto
+										</Typography>
+									</Link>
 								</Grid>
 								<Grid item>
-									<Button color="inherit">Login</Button>
+									<IconButton
+										edge="start"
+										color="inherit"
+										aria-label="searchmenu"
+										onClick={openSearchHandler}
+									>
+										<ManageSearchIcon />
+									</IconButton>
 								</Grid>
 							</Grid>
 						</Toolbar>
 					</AppBar>
-					{menuIsOpen && <Menu />}
+
+					{menuIsOpen || searchIsOpen ? (
+						<Paper
+							sx={{
+								height: '100vh',
+								width: '100%',
+								paddingTop: '4em',
+								position: 'fixed',
+								zIndex: 3,
+							}}
+						>
+							<Grid
+								container
+								direction="column"
+								justifyContent="space-between"
+								alignItems="center"
+								width="100%"
+								height="90%"
+							>
+								{menuIsOpen && (
+									<Grid item width="100%">
+										<Menu />
+									</Grid>
+								)}
+								{searchIsOpen && (
+									<Grid item width="100%">
+										<SearchMenu />
+									</Grid>
+								)}
+								<Grid item>
+									<Button
+										variant="outlined"
+										size="small"
+										startIcon={<CloseIcon />}
+										sx={{
+											justifyContent: 'space-between',
+											color: 'black',
+											borderRadius: '20px',
+										}}
+										onClick={closeHandler}
+									>
+										Close
+									</Button>
+								</Grid>
+							</Grid>
+						</Paper>
+					) : null}
 				</Fragment>
 			</ElevationScroll>
 			<Toolbar />
