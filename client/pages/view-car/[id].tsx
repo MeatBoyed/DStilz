@@ -10,8 +10,8 @@ import { HeaderSection, DataViewerSection } from '../../Lib/ProductPage';
 import prisma from '../../Utils/prisma';
 import { Vehicle } from '@prisma/client';
 
-const RecommendSection = dynamic(
-	() => import('../../Lib/ProductPage/RecommendSection')
+const ProductListSection = dynamic(
+	() => import('../../Utils/Components/ProductListSection')
 );
 const DataEnquireSection = dynamic(
 	() => import('../../Lib/ProductPage/DataEnquireSection')
@@ -40,7 +40,7 @@ export const ProductPage: NextPage<props> = ({
 				transmission={vehicle.specification.transmission}
 			/>
 			<DataEnquireSection specification={vehicle.specification} />
-			<RecommendSection data={recommendedVehicles} />
+			<ProductListSection data={recommendedVehicles} header={true} />
 		</Container>
 	);
 };
