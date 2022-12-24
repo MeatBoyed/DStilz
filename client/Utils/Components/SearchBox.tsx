@@ -12,21 +12,30 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { ISearchBoxData } from '../../DAS/Interfaces';
+import { generateMilages, generatePrices, generateYears } from '../Generators';
 
-export const SearchBox: NextPage = () => {
-	const Categories = [
-		{ make: 'Volkswagen', model: 'Citi', variant: '1.4i' },
-		{ make: 'Volkswagen', model: 'Polo', variant: '1.4' },
-		{ make: 'Volkswagen', model: 'Polo Vivo', variant: '1.4' },
-		{ make: 'Mercedes', model: 'ML-Class', variant: '350' },
-		{ make: 'Mercedes', model: 'X-Class', variant: '350d' },
-		{ make: 'Mercedes', model: 'C-Class', variant: '200' },
-	];
+// Get current info values form the DB
+// Get input input values from the User
+// Make query based on input
 
+export const SearchBox: NextPage<ISearchBoxData> = ({
+	bodyTypes,
+	searchBoxTFData,
+	yearsBoundaries,
+}) => {
 	const [minPrice, setMinPrice] = useState<number>(0);
 	const [maxPrice, setMaxPrice] = useState<number>(0);
+	const [minYear, setMinYear] = useState<number>(0);
+	const [maxYear, setMaxYear] = useState<number>(0);
 	const [bodyType, setBodyType] = useState<string>('bodyType');
 	const [milage, setMilage] = useState<number>(0);
+
+	// There should be a cached version of Searchbox data that can be pulled from, as currently it is unlikely that the database
+	// will be subdue to a lot of complex changes
+
+	// TODO - Before production, generate this Searchbox data based on the "real" data
+
 	return (
 		<Paper
 			sx={{
@@ -51,11 +60,12 @@ export const SearchBox: NextPage = () => {
 				</Grid>
 				<Grid item width="100%">
 					<MenuList>
+						{/* Search Bar */}
 						<MenuItem>
 							<Autocomplete
 								disablePortal
 								id="SearchBox"
-								options={Categories}
+								options={searchBoxTFData}
 								groupBy={(option) => option.make}
 								getOptionLabel={(option) => option.model}
 								size="medium"
@@ -63,16 +73,41 @@ export const SearchBox: NextPage = () => {
 								renderInput={(params) => (
 									<TextField
 										{...params}
-										label="Search Make, Model & Variat"
+										label="Search Make, Model"
 										size="medium"
 										variant="filled"
 									/>
+								)}
+								renderGroup={(params) => (
+									<li>
+										<Typography
+											variant="h5"
+											sx={{
+												fontSize: '1em',
+												fontWeight: '600',
+												padding: '4px 10px',
+											}}
+										>
+											{params.group}
+										</Typography>
+										<Typography
+											variant="h6"
+											sx={{
+												fontSize: '.8em',
+												fontWeight: '500',
+												padding: '4px 10px',
+											}}
+										>
+											{params.children}
+										</Typography>
+									</li>
 								)}
 								sx={{
 									backgroundColor: 'white',
 								}}
 							/>
 						</MenuItem>
+						{/* Min/Max Price */}
 						<MenuItem>
 							<Grid
 								container
@@ -96,10 +131,7 @@ export const SearchBox: NextPage = () => {
 										}}
 									>
 										<MenuItem value={0}>Min Price</MenuItem>
-										<MenuItem value={10000}>10 000</MenuItem>
-										<MenuItem value={50000}>50 000</MenuItem>
-										<MenuItem value={100000}>100 000</MenuItem>
-										<MenuItem value={110000}>110 000</MenuItem>
+										{generatePrices()}
 									</Select>
 								</Grid>
 								<Grid item xs={6}>
@@ -117,14 +149,61 @@ export const SearchBox: NextPage = () => {
 										}}
 									>
 										<MenuItem value={0}>Max Price</MenuItem>
-										<MenuItem value={10000}>10 000</MenuItem>
-										<MenuItem value={50000}>50 000</MenuItem>
-										<MenuItem value={100000}>100 000</MenuItem>
-										<MenuItem value={110000}>110 000</MenuItem>
+										{generatePrices()}
 									</Select>
 								</Grid>
 							</Grid>
 						</MenuItem>
+						{/* Year Selector */}
+						<MenuItem>
+							<Grid
+								container
+								justifyContent="center"
+								alignItems="center"
+								spacing={2}
+							>
+								{/* Min Year */}
+								<Grid item xs={6}>
+									<Select
+										labelId="MinYear"
+										id="MinYear"
+										value={minYear}
+										size="small"
+										label="Min Year"
+										variant="outlined"
+										onChange={(e) => setMinYear(e.target.value as number)}
+										sx={{
+											color: 'rgba(0, 0, 0, 0.6)',
+											backgroundColor: 'white',
+											width: '100%',
+										}}
+									>
+										<MenuItem value={0}>Min Year</MenuItem>
+										{generateYears(yearsBoundaries)}
+									</Select>
+								</Grid>
+								{/* Max Year */}
+								<Grid item xs={6}>
+									<Select
+										labelId="MaxYear"
+										id="MaxYrear"
+										value={maxYear}
+										size="small"
+										label="Max Year"
+										onChange={(e) => setMaxYear(e.target.value as number)}
+										sx={{
+											color: 'rgba(0, 0, 0, 0.6)',
+											backgroundColor: 'white',
+											width: '100%',
+										}}
+									>
+										<MenuItem value={0}>Max Year</MenuItem>
+										{generateYears(yearsBoundaries)}
+									</Select>
+								</Grid>
+							</Grid>
+						</MenuItem>
+						{/* Milage Selector */}
 						<MenuItem>
 							<Select
 								labelId="Milage"
@@ -140,12 +219,10 @@ export const SearchBox: NextPage = () => {
 								}}
 							>
 								<MenuItem value={0}>Max Milage</MenuItem>
-								<MenuItem value={10000}>10 000</MenuItem>
-								<MenuItem value={50000}>50 000</MenuItem>
-								<MenuItem value={100000}>100 000</MenuItem>
-								<MenuItem value={110000}>110 000</MenuItem>
+								{generateMilages()}
 							</Select>
 						</MenuItem>
+						{/* Body Type Selector */}
 						<MenuItem>
 							<Select
 								labelId="BodyType"
@@ -160,15 +237,20 @@ export const SearchBox: NextPage = () => {
 								}}
 							>
 								<MenuItem value={'bodyType'}>Body Type</MenuItem>
-								<MenuItem value={'Coupe'}>Coupe</MenuItem>
-								<MenuItem value={'Crew-Bus'}>Crew Bus</MenuItem>
-								<MenuItem value={'Double-Cab'}>Double Cab</MenuItem>
-								<MenuItem value={'Extended-Cab'}>Extended Cab</MenuItem>
-								<MenuItem value={'Hatchback'}>Hatchback</MenuItem>
-								<MenuItem value={'MPV'}>MPV</MenuItem>
-								<MenuItem value={'Sedan'}>Sedan</MenuItem>
-								<MenuItem value={'Station-Wagon'}>Station Wagon</MenuItem>
-								<MenuItem value={'SUB'}>SUV</MenuItem>
+								{bodyTypes.map((bodyType, i) => (
+									<MenuItem key={i} value={bodyType.bodyType}>
+										<Typography
+											variant="h6"
+											sx={{
+												fontSize: '.9em',
+												fontWeight: '500',
+												padding: '4px 10px',
+											}}
+										>
+											{bodyType.bodyType}
+										</Typography>
+									</MenuItem>
+								))}
 							</Select>
 						</MenuItem>
 					</MenuList>
