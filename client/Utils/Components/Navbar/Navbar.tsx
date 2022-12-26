@@ -128,7 +128,11 @@ export const Navbar: NextPage = () => {
 								)}
 								{searchIsOpen && (
 									<Grid item width="100%">
-										<SearchBox />
+										<SearchBox
+											bodyTypes={[]}
+											yearsBoundaries={[0, 0]}
+											searchBoxTFData={[]}
+										/>
 									</Grid>
 								)}
 								<Grid item>
