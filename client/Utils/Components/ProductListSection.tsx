@@ -10,7 +10,7 @@ const ProductCard = dynamic(() => import('./ProductCard'));
 
 interface props {
 	header?: boolean;
-	data: [Vehicle];
+	data: Vehicle[];
 }
 
 export const ProductListSection: NextPage<props> = ({ data, header }) => {

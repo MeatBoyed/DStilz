@@ -1,6 +1,12 @@
 // NEXT
 import dynamic from 'next/dynamic';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
+import {
+	GetServerSideProps,
+	GetStaticPaths,
+	GetStaticProps,
+	NextPage,
+} from 'next';
 
 // MUI
 import Container from '@mui/material/Container';
@@ -10,70 +16,44 @@ import { HeaderSection } from '../../Lib/ProductPage';
 import prisma from '../../Utils/prisma';
 import { Vehicle } from '@prisma/client';
 import Grid from '@mui/material/Grid';
-import { SearchBox } from '../../Utils';
+import { FilterControls, SearchBox } from '../../Utils';
 import ProductListSection from '../../Utils/Components/ProductListSection';
 import { Pagination, PaginationItem } from '@mui/material';
 import DASClient from '../../DAS/DASClient';
 import { ISearchBoxData } from '../../DAS/Interfaces';
 import { SearchBoxSection } from '../../Lib/HomePage';
+import { MaterialUiLink } from '../../Utils/Components/MUILink';
 
 const RecommendSection = dynamic(
 	() => import('../../Utils/Components/ProductListSection')
 );
 
 interface props {
+	totalPages: number;
+	products: Vehicle[];
 	searchBoxData: ISearchBoxData;
-	// products: [Vehicle];
 }
 
-export const SearchPage: NextPage<props> = ({ searchBoxData }) => {
-	// Might need to use a Buffer system
-	const generateData = () => {
-		let data: [Vehicle] = [
-			{
-				id: 'clbrkx0ga0000tbjofneiwthz',
-				title: 'Audi A3 1.4TFSI STRONIC (35 TFSI)',
-				make: 'Audi',
-				model: 'A3',
-				variant: '1.4TFSI',
-				year: 2019,
-				milage: 73886,
-				price: 319900,
-				color: 'Grey',
-				bodyType: 'Hatchback',
-				images: [
-					'https://qzbzjpcvkmujoinkfgfn.supabase.co/storage/v1/object/public/vehicleimages/594/1.jfif',
-				],
-				features: ['Stronic'],
-			},
-		];
-		for (let i = 0; i < 12; i++) {
-			data.push({
-				id: 'clbrkx0ga0000tbjofneiwthz',
-				title: 'Audi A3 1.4TFSI STRONIC (35 TFSI)',
-				make: 'Audi',
-				model: 'A3',
-				variant: '1.4TFSI',
-				year: 2019,
-				milage: 73886,
-				price: 319900,
-				color: 'Grey',
-				bodyType: 'Hatchback',
-				images: [
-					'https://qzbzjpcvkmujoinkfgfn.supabase.co/storage/v1/object/public/vehicleimages/594/1.jfif',
-				],
-				features: ['Stronic'],
-			});
+export const SearchPage: NextPage<props> = ({
+	searchBoxData,
+	products,
+	totalPages,
+}) => {
+	const { query } = useRouter();
+
+	const getAsString = (value: string | string[]): string => {
+		if (Array.isArray(value)) {
+			return value[0];
 		}
 
-		return data;
+		return value;
 	};
 
 	return (
 		<Container
 			id="ProductPage"
 			component="section"
-			sx={{ marginTop: '18px' }}
+			sx={{ marginTop: '18px', background: '#f1f1f3' }}
 			maxWidth={false}
 			disableGutters={true}
 		>
@@ -83,6 +63,7 @@ export const SearchPage: NextPage<props> = ({ searchBoxData }) => {
 				justifyContent="center"
 				alignItems="center"
 				width="100%"
+				spacing={3}
 			>
 				<Grid item xs={true}>
 					<SearchBox
@@ -92,15 +73,19 @@ export const SearchPage: NextPage<props> = ({ searchBoxData }) => {
 					/>
 				</Grid>
 				{/* Sort & Filter controls */}
+				<Grid item>
+					<FilterControls />
+				</Grid>
+
 				{/* These Controls perform array manipluation to ensure no reloading occurs */}
 				<Grid item width="100%">
 					{/* Render out the current requested data */}
-					<ProductListSection data={generateData()} />
+					<ProductListSection data={products} />
 				</Grid>
-				<Grid item width="100%">
-					{/* <Pagination
-						page={1}
-						count={10}
+				<Grid item>
+					<Pagination
+						page={parseInt(getAsString(query.page) || '1')}
+						count={totalPages}
 						renderItem={(item) => (
 							<PaginationItem
 								component={MaterialUiLink}
@@ -109,7 +94,7 @@ export const SearchPage: NextPage<props> = ({ searchBoxData }) => {
 								{...item}
 							/>
 						)}
-					/> */}
+					/>
 					{/* PagesNeeded/MaxPages - Database must return a value of how many pages are required to render All of the items in a 4x3 layout that match the Search Query */}
 					{/* Iterate & render the pagination controls based on the "MaxPage" value, and if "MaxPages" is > x amount, use smart pagnation rendering */}
 					{/* Each pagination control, will make a new request for the Next 12 (4x3 layout) items */}
@@ -120,12 +105,17 @@ export const SearchPage: NextPage<props> = ({ searchBoxData }) => {
 	);
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const DAS = new DASClient();
 	const searchBoxData = await DAS.getSearchBoxDataAsync();
+	const searchPageData = await DAS.getSearchPageDataAsync(ctx.query);
 
 	return {
-		props: { searchBoxData: searchBoxData },
+		props: {
+			searchBoxData: searchBoxData,
+			totalPages: searchPageData.totalPages,
+			products: searchPageData.products,
+		},
 	};
 };
 
