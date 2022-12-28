@@ -1,32 +1,20 @@
 // NEXT
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import {
-	GetServerSideProps,
-	GetStaticPaths,
-	GetStaticProps,
-	NextPage,
-} from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
 // MUI
 import Container from '@mui/material/Container';
 
 // UI Components
-import { HeaderSection } from '../../Lib/ProductPage';
-import prisma from '../../Utils/prisma';
 import { Vehicle } from '@prisma/client';
 import Grid from '@mui/material/Grid';
-import { FilterControls, SearchBox } from '../../Utils';
+import { SearchBox } from '../../Utils';
 import ProductListSection from '../../Utils/Components/ProductListSection';
 import { Pagination, PaginationItem } from '@mui/material';
 import DASClient from '../../DAS/DASClient';
 import { ISearchBoxData } from '../../DAS/Interfaces';
-import { SearchBoxSection } from '../../Lib/HomePage';
 import { MaterialUiLink } from '../../Utils/Components/MUILink';
-
-const RecommendSection = dynamic(
-	() => import('../../Utils/Components/ProductListSection')
-);
 
 interface props {
 	totalPages: number;
@@ -73,9 +61,6 @@ export const SearchPage: NextPage<props> = ({
 					/>
 				</Grid>
 				{/* Sort & Filter controls */}
-				<Grid item>
-					<FilterControls />
-				</Grid>
 
 				{/* These Controls perform array manipluation to ensure no reloading occurs */}
 				<Grid item width="100%">
