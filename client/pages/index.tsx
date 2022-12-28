@@ -11,6 +11,8 @@ import Grid from '@mui/material/Grid';
 import { BannerSection, SearchBoxSection } from '../Lib/HomePage';
 import { Vehicle } from '@prisma/client';
 import prisma from '../Utils/prisma';
+import DASClient from '../DAS/DASClient';
+import { ISearchBoxData } from '../DAS/Interfaces';
 const ViewMoreSection = dynamic(
 	() => import('../Lib/HomePage/ViewMoreSection')
 );
@@ -18,9 +20,10 @@ const AboutSection = dynamic(() => import('../Lib/HomePage/AboutSection'));
 
 interface props {
 	data: [Vehicle];
+	searchBoxData: ISearchBoxData;
 }
 // Error handling for no Internet
-const Home: NextPage<props> = ({ data }) => {
+const Home: NextPage<props> = ({ data, searchBoxData }) => {
 	return (
 		<Container id="HomePage" maxWidth={false} disableGutters={true}>
 			<Grid
@@ -33,7 +36,7 @@ const Home: NextPage<props> = ({ data }) => {
 					<BannerSection />
 				</Grid>
 				<Grid item sx={{ width: '100%' }}>
-					<SearchBoxSection />
+					<SearchBoxSection searchBoxData={searchBoxData} />
 				</Grid>
 				<Grid item sx={{ width: '100%' }}>
 					<AboutSection />
@@ -47,10 +50,12 @@ const Home: NextPage<props> = ({ data }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
+	const DAS = new DASClient();
 	const data = await prisma.vehicle.findMany();
+	const searchBoxData = await DAS.getSearchBoxDataAsync();
 
 	return {
-		props: { data: data },
+		props: { data: data, searchBoxData: searchBoxData },
 	};
 };
 

@@ -5,11 +5,15 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 
 import { SearchBox } from '../../Utils';
+import { ISearchBoxData } from '../../DAS/Interfaces';
 const InfoCardRender = dynamic(
 	() => import('../../Utils/Components/HomePage/InfoCardRender')
 );
 
-export const SearchBoxSection: NextPage = () => {
+interface props {
+	searchBoxData: ISearchBoxData;
+}
+export const SearchBoxSection: NextPage<props> = ({ searchBoxData }) => {
 	return (
 		<Container
 			maxWidth={false}
@@ -27,7 +31,11 @@ export const SearchBoxSection: NextPage = () => {
 					spacing={5}
 				>
 					<Grid item sm={6}>
-						<SearchBox />
+						<SearchBox
+							bodyTypes={searchBoxData.bodyTypes}
+							searchBoxTFData={searchBoxData.searchBoxTFData}
+							yearsBoundaries={searchBoxData.yearsBoundaries}
+						/>
 					</Grid>
 					<Grid item>
 						<InfoCardRender />
