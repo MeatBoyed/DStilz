@@ -16,8 +16,10 @@ export const getValueStr = (value: string | string[]): string | null => {
 
 export const getValueNumber = (value: string | string[]): number | null => {
 	const str = getValueStr(value);
-	const number = parseInt(str);
-	return isNaN(number) ? null : number;
+	if (str == null) {
+		return null;
+	}
+	return isNaN(parseInt(str)) ? null : parseInt(str);
 };
 
 // Object Type Checking
