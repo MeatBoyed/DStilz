@@ -10,9 +10,12 @@ import {
 	getValueNumber,
 	getValueStr,
 	isFullVehicle,
+	isProductPageParam,
 	isSearchPageQuery,
 } from './Utils';
-import prisma from '../Utils/prisma';
+// import prisma from '../Utils/prisma';
+import prisma from './prisma';
+import { GetStaticPathsResult } from 'next';
 
 export class DASClient {
 	// Get Page Data
@@ -105,34 +108,15 @@ export class DASClient {
 	}
 
 	// Util Methods
-	private async getSearchBoxTextFieldData(): Promise<
-		{ make: string; model: string }[]
-	> {
-		let data: [{ make: string; model: string }] = [{ make: '', model: '' }];
-
-		const vehicleMMV = await prisma.vehicle.groupBy({
-			by: ['make', 'model'],
-			_count: { model: true },
-			orderBy: { make: 'asc' },
+	public async generateStaticPaths(): Promise<GetStaticPathsResult> {
+		const vehicles = await prisma.vehicle.findMany({
+			select: { id: true },
 		});
 
-		const getMakeCounts = await prisma.vehicle.groupBy({
-			by: ['make'],
-			_count: true,
-		});
-
-		vehicleMMV.forEach((item, index) => {
-			let row: { make: string; model: string } = { make: '', model: '' };
-			getMakeCounts.forEach((el) => {
-				if (item.make === el.make) {
-					row.make = `${el.make} (${el._count})`;
-				}
-				row.model = `${item.model} (${item._count.model})`;
-				data[index] = row;
-			});
-		});
-
-		return data;
+		return {
+			paths: vehicles.map((vehicle) => ({ params: { id: vehicle.id } })),
+			fallback: false,
+		};
 	}
 
 	public async getSearchBoxDataAsync(): Promise<ISearchBoxData> {
@@ -168,5 +152,35 @@ export class DASClient {
 			yearsBoundaries: years,
 			searchBoxTFData: searchBoxTFData,
 		};
+	}
+
+	private async getSearchBoxTextFieldData(): Promise<
+		{ make: string; model: string }[]
+	> {
+		let data: [{ make: string; model: string }] = [{ make: '', model: '' }];
+
+		const vehicleMMV = await prisma.vehicle.groupBy({
+			by: ['make', 'model'],
+			_count: { model: true },
+			orderBy: { make: 'asc' },
+		});
+
+		const getMakeCounts = await prisma.vehicle.groupBy({
+			by: ['make'],
+			_count: true,
+		});
+
+		vehicleMMV.forEach((item, index) => {
+			let row: { make: string; model: string } = { make: '', model: '' };
+			getMakeCounts.forEach((el) => {
+				if (item.make === el.make) {
+					row.make = `${el.make} (${el._count})`;
+				}
+				row.model = `${item.model} (${item._count.model})`;
+				data[index] = row;
+			});
+		});
+
+		return data;
 	}
 }

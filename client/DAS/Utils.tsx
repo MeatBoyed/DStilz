@@ -41,12 +41,11 @@ export const isFullVehicle = (object: unknown): object is FullVehicle => {
 };
 
 // Parameter & Query Type Checking
-export const isCorrectParams = (
-	object: unknown,
-	param: string
+export const isProductPageParam = (
+	object: unknown
 ): object is ProductPageParams => {
 	if (object !== null && typeof object === 'object') {
-		return param in object;
+		return 'id' in object;
 	}
 
 	return false;

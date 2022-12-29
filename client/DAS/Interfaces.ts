@@ -1,12 +1,16 @@
 import { Specification, Vehicle } from '@prisma/client';
+import { GetStaticPathsResult } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
 // DAS Definitions
 export interface IDASClient {
-	getHomePageDataAsync(): Promise<HomePageDataProp>;
 	getSearchBoxDataAsync(): Promise<ISearchBoxData>;
-	getSearchPageDataAsync(): Promise<SearchPageDataProp>;
-	getProductPageDataAsync(): Promise<ProductPageDataProp | NotFoundResult>;
+	getHomePageDataAsync(): Promise<HomePageDataProp>;
+	generateStaticPaths(): Promise<GetStaticPathsResult>;
+	getSearchPageDataAsync(query: ParsedUrlQuery): Promise<SearchPageDataProp>;
+	getProductPageDataAsync(
+		id: string
+	): Promise<ProductPageDataProp | NotFoundResult>;
 }
 
 // Page Props

@@ -1,6 +1,7 @@
 // NEXT & Prisma
 import dynamic from 'next/dynamic';
-import { DASClient, IHomePageData } from '../DAS';
+import DAS from '../Utils/DASClient';
+import { IHomePageData } from '../DAS';
 import type { GetStaticProps, NextPage } from 'next';
 
 // MUI
@@ -46,8 +47,7 @@ const Home: NextPage<IHomePageData> = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-	const DAS = new DASClient();
-	return DAS.getHomePageDataAsync();
+	return await DAS.getHomePageDataAsync();
 };
 
 export default Home;

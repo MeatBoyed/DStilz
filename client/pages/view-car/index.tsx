@@ -1,7 +1,8 @@
 // NEXT
 import { useRouter } from 'next/router';
-import { DASClient, getValueNumber, ISearchPageData } from '../../DAS';
 import { GetServerSideProps, NextPage } from 'next';
+import DAS from '../../Utils/DASClient';
+import { getValueNumber, ISearchPageData } from '../../DAS';
 
 // MUI
 import Container from '@mui/material/Container';
@@ -75,7 +76,6 @@ export const SearchPage: NextPage<ISearchPageData> = ({
 
 // Complex Type checking is needed for Query, therefore it is in the DAS layer
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	const DAS = new DASClient();
 	return await DAS.getSearchPageDataAsync(ctx.query);
 };
 
