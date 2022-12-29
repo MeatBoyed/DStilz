@@ -1,41 +1,24 @@
 // NEXT
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { DASClient } from '../../DAS';
+import { DASClient, getValueNumber, ISearchPageData } from '../../DAS';
 import { GetServerSideProps, NextPage } from 'next';
 
 // MUI
 import Container from '@mui/material/Container';
 
 // UI Components
-import { Vehicle } from '@prisma/client';
 import Grid from '@mui/material/Grid';
 import { SearchBox } from '../../Utils';
-import ProductListSection from '../../Utils/Components/ProductListSection';
 import { Pagination, PaginationItem } from '@mui/material';
-import { ISearchBoxData } from '../../DAS/Interfaces';
 import { MaterialUiLink } from '../../Utils/Components/MUILink';
+import ProductListSection from '../../Utils/Components/ProductListSection';
 
-interface props {
-	totalPages: number;
-	products: Vehicle[];
-	searchBoxData: ISearchBoxData;
-}
-
-export const SearchPage: NextPage<props> = ({
+export const SearchPage: NextPage<ISearchPageData> = ({
 	searchBoxData,
 	products,
 	totalPages,
 }) => {
 	const { query } = useRouter();
-
-	const getAsString = (value: string | string[]): string => {
-		if (Array.isArray(value)) {
-			return value[0];
-		}
-
-		return value;
-	};
 
 	return (
 		<Container
@@ -69,7 +52,7 @@ export const SearchPage: NextPage<props> = ({
 				</Grid>
 				<Grid item>
 					<Pagination
-						page={parseInt(getAsString(query.page) || '1')}
+						page={getValueNumber(query.page) || 1}
 						count={totalPages}
 						renderItem={(item) => (
 							<PaginationItem

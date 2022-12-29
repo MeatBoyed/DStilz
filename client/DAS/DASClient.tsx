@@ -1,22 +1,110 @@
 import { ParsedUrlQuery } from 'querystring';
-import { ProductCardProps } from '../Utils/Interfaces';
 import {
-	IProductPageData,
+	HomePageDataProp,
 	ISearchBoxData,
-	ISearchPageData,
 	NotFoundResult,
 	ProductPageDataProp,
 	SearchPageDataProp,
 } from './Interfaces';
-import prisma from './Prisma';
 import {
 	getValueNumber,
 	getValueStr,
 	isFullVehicle,
 	isSearchPageQuery,
 } from './Utils';
+import prisma from '../Utils/prisma';
 
 export class DASClient {
+	// Get Page Data
+	public async getHomePageDataAsync(): Promise<HomePageDataProp> {
+		const vehicles = await prisma.vehicle.findMany();
+		return {
+			props: {
+				recommendedVehicles: vehicles,
+				searchBoxData: await this.getSearchBoxDataAsync(),
+			},
+		};
+	}
+
+	public async getProductPageDataAsync(
+		id: string
+	): Promise<ProductPageDataProp | NotFoundResult> {
+		const vehicle = await prisma.vehicle.findUnique({
+			where: {
+				id: id,
+			},
+			include: {
+				specification: true,
+			},
+		});
+
+		// Ensure Vehicle exists & is of correct Type
+		if (!isFullVehicle(vehicle)) {
+			return { notFound: true };
+		}
+
+		const recommendedVehicles = await prisma.vehicle.findMany();
+
+		return {
+			props: {
+				vehicle: vehicle,
+				recommendedVehicles: recommendedVehicles,
+			},
+		};
+	}
+
+	// TODO Implement Offsetting
+	public async getSearchPageDataAsync(
+		query: ParsedUrlQuery
+	): Promise<SearchPageDataProp> {
+		if (!isSearchPageQuery(query)) {
+			return {
+				props: {
+					products: await prisma.vehicle.findMany(),
+					totalPages: 0,
+					searchBoxData: await this.getSearchBoxDataAsync(),
+				},
+			};
+		}
+		const page = getValueNumber(query.page) || 1;
+		const rowsPerPage = getValueNumber(query.rowsPerPage) || 4;
+		const offset = (page - 1) * rowsPerPage;
+
+		const cars = await prisma.vehicle.findMany({
+			where: {
+				make: getValueStr(query.make) || undefined,
+				model: getValueStr(query.model) || undefined,
+				price: {
+					lte: getValueNumber(query.maxPrice) || undefined,
+					gte: getValueNumber(query.minPrice) || undefined,
+				},
+				year: {
+					lte: getValueNumber(query.maxYear) || undefined,
+					gte: getValueNumber(query.minYear) || undefined,
+				},
+				milage: {
+					lte: getValueNumber(query.milage) || undefined,
+				},
+				bodyType: getValueStr(query.bodyType) || undefined,
+			},
+			take: 20,
+		});
+
+		const totalRows = await prisma.vehicle.aggregate({
+			where: { make: query.make, model: query.model },
+			_count: true,
+		});
+
+		return {
+			props: {
+				products: cars,
+				totalPages: Math.ceil(totalRows._count / rowsPerPage),
+				searchBoxData: await this.getSearchBoxDataAsync(),
+			},
+		};
+	}
+
+	// Util Methods
 	private async getSearchBoxTextFieldData(): Promise<
 		{ make: string; model: string }[]
 	> {
@@ -79,84 +167,6 @@ export class DASClient {
 			bodyTypes: getBodyTypes,
 			yearsBoundaries: years,
 			searchBoxTFData: searchBoxTFData,
-		};
-	}
-
-	// TODO Implement Offsetting
-	public async getSearchPageDataAsync(
-		query: ParsedUrlQuery
-	): Promise<SearchPageDataProp> {
-		if (!isSearchPageQuery(query)) {
-			return {
-				props: {
-					products: await prisma.vehicle.findMany(),
-					totalPages: 0,
-					searchBoxData: await this.getSearchBoxDataAsync(),
-				},
-			};
-		}
-		const page = getValueNumber(query.page) || 1;
-		const rowsPerPage = getValueNumber(query.rowsPerPage) || 4;
-		const offset = (page - 1) * rowsPerPage;
-
-		const cars = await prisma.vehicle.findMany({
-			where: {
-				make: getValueStr(query.make) || undefined,
-				model: getValueStr(query.model) || undefined,
-				price: {
-					lte: getValueNumber(query.maxPrice) || undefined,
-					gte: getValueNumber(query.minPrice) || undefined,
-				},
-				year: {
-					lte: getValueNumber(query.maxYear) || undefined,
-					gte: getValueNumber(query.minYear) || undefined,
-				},
-				milage: {
-					lte: getValueNumber(query.milage) || undefined,
-				},
-				bodyType: getValueStr(query.bodyType) || undefined,
-			},
-			take: 20,
-		});
-
-		const totalRows = await prisma.vehicle.aggregate({
-			where: { make: query.make, model: query.model },
-			_count: true,
-		});
-
-		return {
-			props: {
-				products: cars,
-				totalPages: Math.ceil(totalRows._count / rowsPerPage),
-				searchBoxData: await this.getSearchBoxDataAsync(),
-			},
-		};
-	}
-
-	public async getProductPageDataAsync(
-		id: string
-	): Promise<ProductPageDataProp | NotFoundResult> {
-		const vehicle = await prisma.vehicle.findUnique({
-			where: {
-				id: id,
-			},
-			include: {
-				specification: true,
-			},
-		});
-
-		// Ensure Vehicle exists & is of correct Type
-		if (!isFullVehicle(vehicle)) {
-			return { notFound: true };
-		}
-
-		const recommendedVehicles = await prisma.vehicle.findMany();
-
-		return {
-			props: {
-				vehicle: vehicle,
-				recommendedVehicles: recommendedVehicles,
-			},
 		};
 	}
 }

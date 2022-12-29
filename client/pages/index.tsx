@@ -1,5 +1,6 @@
 // NEXT & Prisma
 import dynamic from 'next/dynamic';
+import { DASClient, IHomePageData } from '../DAS';
 import type { GetStaticProps, NextPage } from 'next';
 
 // MUI
@@ -9,21 +10,16 @@ import Grid from '@mui/material/Grid';
 
 // Utils
 import { BannerSection, SearchBoxSection } from '../Lib/HomePage';
-import { Vehicle } from '@prisma/client';
-import prisma from '../Utils/prisma';
-import DASClient from '../DAS/DASClient';
-import { ISearchBoxData } from '../DAS/Interfaces';
-const ViewMoreSection = dynamic(
-	() => import('../Lib/HomePage/ViewMoreSection')
-);
 const AboutSection = dynamic(() => import('../Lib/HomePage/AboutSection'));
+const ProductListSection = dynamic(
+	() => import('../Utils/Components/ProductListSection')
+);
 
-interface props {
-	data: [Vehicle];
-	searchBoxData: ISearchBoxData;
-}
 // Error handling for no Internet
-const Home: NextPage<props> = ({ data, searchBoxData }) => {
+const Home: NextPage<IHomePageData> = ({
+	recommendedVehicles,
+	searchBoxData,
+}) => {
 	return (
 		<Container id="HomePage" maxWidth={false} disableGutters={true}>
 			<Grid
@@ -42,7 +38,7 @@ const Home: NextPage<props> = ({ data, searchBoxData }) => {
 					<AboutSection />
 				</Grid>
 				<Grid item sx={{ width: '100%' }}>
-					<ViewMoreSection data={data} />
+					<ProductListSection data={recommendedVehicles} />
 				</Grid>
 			</Grid>
 		</Container>
@@ -51,12 +47,7 @@ const Home: NextPage<props> = ({ data, searchBoxData }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
 	const DAS = new DASClient();
-	const data = await prisma.vehicle.findMany();
-	const searchBoxData = await DAS.getSearchBoxDataAsync();
-
-	return {
-		props: { data: data, searchBoxData: searchBoxData },
-	};
+	return DAS.getHomePageDataAsync();
 };
 
 export default Home;

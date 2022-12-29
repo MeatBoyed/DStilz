@@ -3,8 +3,10 @@ import { ParsedUrlQuery } from 'querystring';
 
 // DAS Definitions
 export interface IDASClient {
+	getHomePageDataAsync(): Promise<HomePageDataProp>;
 	getSearchBoxDataAsync(): Promise<ISearchBoxData>;
 	getSearchPageDataAsync(): Promise<SearchPageDataProp>;
+	getProductPageDataAsync(): Promise<ProductPageDataProp | NotFoundResult>;
 }
 
 // Page Props
@@ -24,6 +26,14 @@ export interface ISearchPageData {
 
 export interface SearchPageDataProp {
 	props: ISearchPageData;
+}
+
+export interface IHomePageData {
+	searchBoxData: ISearchBoxData;
+	recommendedVehicles: Vehicle[];
+}
+export interface HomePageDataProp {
+	props: IHomePageData;
 }
 
 // Component Props
