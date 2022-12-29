@@ -1,3 +1,6 @@
+import { FullVehicle, ProductPageParams } from './Interfaces';
+
+// Primitive Type Checking
 export const getAsString = (value: string | string[]): string => {
 	if (Array.isArray(value)) {
 		return value[0];
@@ -15,4 +18,25 @@ export const getValueNumber = (value: string | string[]): number | null => {
 	const str = getValueStr(value);
 	const number = parseInt(str);
 	return isNaN(number) ? null : number;
+};
+
+// Object Type Checking
+export const isFullVehicle = (object: unknown): object is FullVehicle => {
+	if (object !== null && typeof object === 'object') {
+		return 'specification' in object;
+	}
+
+	return false;
+};
+
+// Parameter Type Checking
+export const isCorrectParams = (
+	object: unknown,
+	param: string
+): object is ProductPageParams => {
+	if (object !== null && typeof object === 'object') {
+		return param in object;
+	}
+
+	return false;
 };

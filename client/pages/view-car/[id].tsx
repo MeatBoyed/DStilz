@@ -1,15 +1,14 @@
-// NEXT
+// NEXT, Prisma & DAS
 import dynamic from 'next/dynamic';
+import prisma from '../../Utils/prisma';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { DASClient, isCorrectParams, IProductPageData } from '../../DAS';
 
 // MUI
 import Container from '@mui/material/Container';
 
 // UI Components
 import { HeaderSection, DataViewerSection } from '../../Lib/ProductPage';
-import prisma from '../../Utils/prisma';
-import { Vehicle } from '@prisma/client';
-
 const ProductListSection = dynamic(
 	() => import('../../Utils/Components/ProductListSection')
 );
@@ -17,12 +16,7 @@ const DataEnquireSection = dynamic(
 	() => import('../../Lib/ProductPage/DataEnquireSection')
 );
 
-interface props {
-	vehicle: Vehicle;
-	recommendedVehicles: [Vehicle];
-}
-
-export const ProductPage: NextPage<props> = ({
+export const ProductPage: NextPage<IProductPageData> = ({
 	vehicle,
 	recommendedVehicles,
 }) => {
@@ -57,29 +51,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const vehicle = await prisma.vehicle.findUnique({
-		where: {
-			id: params.id,
-		},
-		include: {
-			specification: true,
-		},
-	});
-
-	if (vehicle) {
-		const recommendedVehicles = await prisma.vehicle.findMany();
-
-		return {
-			props: {
-				vehicle: vehicle,
-				recommendedVehicles: recommendedVehicles,
-			},
-		};
+	if (!isCorrectParams(params, 'id')) {
+		return { notFound: true };
 	}
 
-	return {
-		notFound: true,
-	};
+	return await new DASClient().getProductPageDataAsync(params.id);
 };
 
 export default ProductPage;

@@ -1,10 +1,16 @@
-import { Prisma } from '@prisma/client';
 import { ParsedUrlQuery } from 'querystring';
-import { ISearchBoxData, ISearchPageData } from './Interfaces';
+import { ProductCardProps } from '../Utils/Interfaces';
+import {
+	IProductPageData,
+	ISearchBoxData,
+	ISearchPageData,
+	NotFoundResult,
+	ProductPageDataProp,
+} from './Interfaces';
 import prisma from './Prisma';
-import { getValueNumber, getValueStr } from './Utils';
+import { getValueNumber, getValueStr, isFullVehicle } from './Utils';
 
-export default class DASClient {
+export class DASClient {
 	private async getSearchBoxTextFieldData() {
 		let data: [{ make: string; model: string }] = [{ make: '', model: '' }];
 
@@ -105,6 +111,33 @@ export default class DASClient {
 		return {
 			products: cars,
 			totalPages: totalPages,
+		};
+	}
+
+	public async getProductPageDataAsync(
+		id: string
+	): Promise<ProductPageDataProp | NotFoundResult> {
+		const vehicle = await prisma.vehicle.findUnique({
+			where: {
+				id: id,
+			},
+			include: {
+				specification: true,
+			},
+		});
+
+		// Ensure Vehicle exists & is of correct Type
+		if (!isFullVehicle(vehicle)) {
+			return { notFound: true };
+		}
+
+		const recommendedVehicles = await prisma.vehicle.findMany();
+
+		return {
+			props: {
+				vehicle: vehicle,
+				recommendedVehicles: recommendedVehicles,
+			},
 		};
 	}
 }
