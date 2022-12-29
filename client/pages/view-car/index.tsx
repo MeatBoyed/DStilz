@@ -1,6 +1,7 @@
 // NEXT
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { DASClient } from '../../DAS';
 import { GetServerSideProps, NextPage } from 'next';
 
 // MUI
@@ -12,7 +13,6 @@ import Grid from '@mui/material/Grid';
 import { SearchBox } from '../../Utils';
 import ProductListSection from '../../Utils/Components/ProductListSection';
 import { Pagination, PaginationItem } from '@mui/material';
-import DASClient from '../../DAS/DASClient';
 import { ISearchBoxData } from '../../DAS/Interfaces';
 import { MaterialUiLink } from '../../Utils/Components/MUILink';
 
@@ -90,18 +90,10 @@ export const SearchPage: NextPage<props> = ({
 	);
 };
 
+// Complex Type checking is needed for Query, therefore it is in the DAS layer
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const DAS = new DASClient();
-	const searchBoxData = await DAS.getSearchBoxDataAsync();
-	const searchPageData = await DAS.getSearchPageDataAsync(ctx.query);
-
-	return {
-		props: {
-			searchBoxData: searchBoxData,
-			totalPages: searchPageData.totalPages,
-			products: searchPageData.products,
-		},
-	};
+	return await DAS.getSearchPageDataAsync(ctx.query);
 };
 
 export default SearchPage;

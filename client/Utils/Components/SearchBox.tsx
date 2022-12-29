@@ -57,6 +57,8 @@ export const SearchBox: NextPage<ISearchBoxData> = ({
 				0,
 				searchBoxData.model.indexOf(' (')
 			);
+		} else {
+			query.make = '*';
 		}
 
 		// Price

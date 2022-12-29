@@ -6,12 +6,20 @@ import {
 	ISearchPageData,
 	NotFoundResult,
 	ProductPageDataProp,
+	SearchPageDataProp,
 } from './Interfaces';
 import prisma from './Prisma';
-import { getValueNumber, getValueStr, isFullVehicle } from './Utils';
+import {
+	getValueNumber,
+	getValueStr,
+	isFullVehicle,
+	isSearchPageQuery,
+} from './Utils';
 
 export class DASClient {
-	private async getSearchBoxTextFieldData() {
+	private async getSearchBoxTextFieldData(): Promise<
+		{ make: string; model: string }[]
+	> {
 		let data: [{ make: string; model: string }] = [{ make: '', model: '' }];
 
 		const vehicleMMV = await prisma.vehicle.groupBy({
@@ -77,7 +85,16 @@ export class DASClient {
 	// TODO Implement Offsetting
 	public async getSearchPageDataAsync(
 		query: ParsedUrlQuery
-	): Promise<ISearchPageData> {
+	): Promise<SearchPageDataProp> {
+		if (!isSearchPageQuery(query)) {
+			return {
+				props: {
+					products: await prisma.vehicle.findMany(),
+					totalPages: 0,
+					searchBoxData: await this.getSearchBoxDataAsync(),
+				},
+			};
+		}
 		const page = getValueNumber(query.page) || 1;
 		const rowsPerPage = getValueNumber(query.rowsPerPage) || 4;
 		const offset = (page - 1) * rowsPerPage;
@@ -106,11 +123,13 @@ export class DASClient {
 			where: { make: query.make, model: query.model },
 			_count: true,
 		});
-		const totalPages = Math.ceil(totalRows._count / rowsPerPage);
 
 		return {
-			products: cars,
-			totalPages: totalPages,
+			props: {
+				products: cars,
+				totalPages: Math.ceil(totalRows._count / rowsPerPage),
+				searchBoxData: await this.getSearchBoxDataAsync(),
+			},
 		};
 	}
 

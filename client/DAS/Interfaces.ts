@@ -3,7 +3,8 @@ import { ParsedUrlQuery } from 'querystring';
 
 // DAS Definitions
 export interface IDASClient {
-	getSearchBoxData(): Promise<ISearchBoxData>;
+	getSearchBoxDataAsync(): Promise<ISearchBoxData>;
+	getSearchPageDataAsync(): Promise<SearchPageDataProp>;
 }
 
 // Page Props
@@ -18,7 +19,11 @@ export interface ProductPageDataProp {
 export interface ISearchPageData {
 	totalPages: number;
 	products: Vehicle[];
-	// searchBoxData: ISearchBoxData;
+	searchBoxData: ISearchBoxData;
+}
+
+export interface SearchPageDataProp {
+	props: ISearchPageData;
 }
 
 // Component Props
@@ -31,6 +36,19 @@ export interface ISearchBoxData {
 // Param
 export interface ProductPageParams extends ParsedUrlQuery {
 	id: string;
+}
+
+export interface SearchPageQuery extends ParsedUrlQuery {
+	make: string;
+	page?: string;
+	model?: string;
+	milage?: string;
+	maxYear?: string;
+	minYear?: string;
+	maxPrice?: string;
+	minPrice?: string;
+	bodyType?: string;
+	rowsPerPage?: string;
 }
 
 // UTILs
