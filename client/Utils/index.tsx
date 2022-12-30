@@ -9,6 +9,7 @@ export { default as InfoCard } from './Components/HomePage/InfoCard';
 export { default as SearchBox } from './Components/SearchBox';
 export { default as EnquireCard } from './Components/ProductPage/EnquireCard';
 export { default as ImageViewer } from './Components/ProductPage/ImageViewer';
+export { default as DataViewerButtons } from './Components/ProductPage/DataViewerButtons';
 export { default as InfoCardRender } from './Components/HomePage/InfoCardRender';
 export { default as SpecificationTable } from './Components/ProductPage/SpecificationTable';
 export { default as DataViewerTable } from './Components/ProductPage/DataViewerTable';

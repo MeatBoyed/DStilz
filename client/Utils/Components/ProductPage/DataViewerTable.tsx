@@ -6,6 +6,8 @@ import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import DataViewerButtons from './DataViewerButtons';
+import Grid from '@mui/material/Grid';
 
 interface props {
 	make: string;
@@ -28,135 +30,148 @@ export const DataViewerTable: NextPage<props> = ({
 	features,
 }) => {
 	return (
-		<TableContainer component={Paper}>
-			<Table sx={{ width: '100%', bgcolor: '#1B2935', color: '#ffff' }}>
-				<TableBody>
-					<TableRow>
-						<TableCell
-							component="th"
-							scope="row"
-							variant="head"
-							sx={{
-								color: '#ffff',
-								fontSize: '1.3em',
-								fontWeight: '600',
-							}}
-						>
-							Vehicle Details
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						></TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-							Make:
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						>
-							{make}
-						</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-							Series:
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						>
-							{variant}
-						</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-							Model:
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						>
-							{model}
-						</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-							Milage
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						>
-							{milage}
-						</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-							Transmission:
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						>
-							{transmission}
-						</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-							Registration Year
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						>
-							{year}
-						</TableCell>
-					</TableRow>
-					<TableRow>
-						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-							Body Type:
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						>
-							{bodyType}
-						</TableCell>
-					</TableRow>
-					{/* Render out list of features */}
-					<TableRow>
-						<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
-							Features:
-						</TableCell>
-						<TableCell
-							component="th"
-							scope="row"
-							align="right"
-							sx={{ color: '#ffff' }}
-						></TableCell>
-					</TableRow>
-				</TableBody>
-			</Table>
-		</TableContainer>
+		<Grid
+			container
+			direction="column"
+			alignItems="flex-start"
+			justifyContent="flex-start"
+			width="100%"
+		>
+			<Grid item width="100%" sx={{ marginBottom: '2em' }}>
+				<TableContainer component={Paper}>
+					<Table sx={{ width: '100%', bgcolor: '#1B2935', color: '#ffff' }}>
+						<TableBody>
+							<TableRow>
+								<TableCell
+									component="th"
+									scope="row"
+									variant="head"
+									sx={{
+										color: '#ffff',
+										fontSize: '1.3em',
+										fontWeight: '600',
+									}}
+								>
+									Vehicle Details
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								></TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+									Make:
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								>
+									{make}
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+									Series:
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								>
+									{variant}
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+									Model:
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								>
+									{model}
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+									Milage
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								>
+									{milage}
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+									Transmission:
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								>
+									{transmission}
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+									Registration Year
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								>
+									{year}
+								</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+									Body Type:
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								>
+									{bodyType}
+								</TableCell>
+							</TableRow>
+							{/* Render out list of features */}
+							<TableRow>
+								<TableCell component="th" scope="row" sx={{ color: '#ffff' }}>
+									Features:
+								</TableCell>
+								<TableCell
+									component="th"
+									scope="row"
+									align="right"
+									sx={{ color: '#ffff' }}
+								></TableCell>
+							</TableRow>
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</Grid>
+			<Grid item width="100%">
+				<DataViewerButtons />
+			</Grid>
+		</Grid>
 	);
 };
 
