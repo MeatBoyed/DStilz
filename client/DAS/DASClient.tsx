@@ -14,7 +14,7 @@ import {
 	isSearchPageQuery,
 } from './Utils';
 // import prisma from '../Utils/prisma';
-import prisma from './prisma';
+import { prisma } from './prisma';
 import { GetStaticPathsResult } from 'next';
 
 export class DASClient {

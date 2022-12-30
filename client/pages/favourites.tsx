@@ -4,27 +4,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { ProductCard } from '../Utils/index';
-import ProductCardImage from '../public/ProductCard.jpg';
-import { ProductCardData } from '../Utils/Interfaces';
-
 export const FavouritesPageIndex: NextPage = () => {
-	const data: ProductCardData = {
-		slug: { _type: 'product', current: 'kdjsfkjasfdk' },
-		title: '2017 Porsche 911',
-		thumbnail: {
-			_key: 'askdja',
-			_type: 'image',
-			asset: { _ref: 'iad', _type: 'asdkjasd' },
-		},
-		make: 'Porsche',
-		model: '911',
-		registrationYear: '2017',
-		price: 0.000016,
-		milage: 50000,
-		fuelType: 'petrol',
-		transmissionType: 'Automatic',
-	};
 	return (
 		<Container
 			id="FavouritesPage"
@@ -47,30 +27,14 @@ export const FavouritesPageIndex: NextPage = () => {
 					Favourites
 				</Typography>
 				<Grid container alignItems="center" justifyContent="center" spacing={5}>
-					<Grid item>
-						<ProductCard product={data} key={2} />
-					</Grid>
-					<Grid item>
-						<ProductCard product={data} key={2} />
-					</Grid>
-					<Grid item>
-						<ProductCard product={data} key={2} />
-					</Grid>
-					<Grid item>
-						<ProductCard product={data} key={2} />
-					</Grid>
-					<Grid item>
-						<ProductCard product={data} key={2} />
-					</Grid>
-					<Grid item>
-						<ProductCard product={data} key={2} />
-					</Grid>
-					<Grid item>
-						<ProductCard product={data} key={2} />
-					</Grid>
-					<Grid item>
-						<ProductCard product={data} key={2} />
-					</Grid>
+					<Grid item>{/* <ProductCard product={data} key={2} /> */}</Grid>
+					<Grid item>{/* <ProductCard product={data} key={2} /> */}</Grid>
+					<Grid item>{/* <ProductCard product={data} key={2} /> */}</Grid>
+					<Grid item>{/* <ProductCard product={data} key={2} /> */}</Grid>
+					<Grid item>{/* <ProductCard product={data} key={2} /> */}</Grid>
+					<Grid item>{/* <ProductCard product={data} key={2} /> */}</Grid>
+					<Grid item>{/* <ProductCard product={data} key={2} /> */}</Grid>
+					<Grid item>{/* <ProductCard product={data} key={2} /> */}</Grid>
 				</Grid>
 			</Container>
 		</Container>
