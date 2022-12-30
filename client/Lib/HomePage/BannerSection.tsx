@@ -5,9 +5,6 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-// Make it Smaller (file size)
-import Banner2 from '../../public/Banner2.jpg';
-
 export const BannerSection: NextPage = () => {
 	const bannerStyle = {
 		width: '100%',
@@ -33,11 +30,12 @@ export const BannerSection: NextPage = () => {
 				}}
 			>
 				<Image
-					src={Banner2.src}
+					src="/GeneralImages/homepagebanner_g2dg4t.jpg"
 					layout="fill"
 					objectFit="cover"
 					alt="Homepage Banner"
 					style={{ opacity: 0.5 }}
+					priority
 				/>
 			</Grid>
 			<Grid

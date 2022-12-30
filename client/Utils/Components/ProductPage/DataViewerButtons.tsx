@@ -1,16 +1,13 @@
 // Next
+import Image from 'next/image';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 // MUI
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
-// Utils
-import WhatsAppMed from '../../../public/WhatsAppMed.svg';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 export const DataViewerButtons: NextPage = () => {
 	const router = useRouter();
@@ -38,7 +35,7 @@ export const DataViewerButtons: NextPage = () => {
 							width={30}
 							height={30}
 							objectFit="fill"
-							src={WhatsAppMed.src}
+							src="/GeneralImages/whatsAppIcon_kqginj.svg"
 						/>
 					}
 					sx={{

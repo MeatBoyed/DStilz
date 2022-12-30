@@ -16,7 +16,7 @@ export const InfoCardRender: NextPage = () => {
 		>
 			<Grid item>
 				<InfoCard
-					icon={CarSale.src}
+					icon="/GeneralImages/carSaleIcon_qellri.png"
 					header={'We Buy Cars Cash'}
 					body={
 						'Reach South Africa’s biggest and most serious audience of car buyers.'
@@ -25,7 +25,7 @@ export const InfoCardRender: NextPage = () => {
 			</Grid>
 			<Grid item>
 				<InfoCard
-					icon={CarSale.src}
+					icon="/GeneralImages/carSaleIcon_qellri.png"
 					header={'We Buy Cars Cash'}
 					body={
 						'Search through 61 cars online, and have it delivered to your door.'
