@@ -27,6 +27,7 @@ export const ImageViewer: NextPage<props> = ({ images }) => {
 					width={800}
 					height={600}
 					objectFit="cover"
+					layout='intrinsic'
 				/>
 			</Grid>
 			<Grid

@@ -11,9 +11,7 @@ export const getAsString = (value: string | string[]): string => {
 	return value;
 };
 
-export const getValueStr = (
-	value: string | string[] | undefined
-): string | null => {
+export const getValueStr = (value: string | string[] | undefined): string | null => {
 	if (value == undefined || value == '*') {
 		return null;
 	}
@@ -21,9 +19,7 @@ export const getValueStr = (
 	return !str || str.toLowerCase() === 'all' ? null : str;
 };
 
-export const getValueNumber = (
-	value: string | string[] | undefined
-): number | null => {
+export const getValueNumber = (value: string | string[] | undefined): number | null => {
 	const str = getValueStr(value);
 	if (str == null) {
 		return null;
@@ -41,9 +37,7 @@ export const isFullVehicle = (object: unknown): object is FullVehicle => {
 };
 
 // Parameter & Query Type Checking
-export const isProductPageParam = (
-	object: unknown
-): object is ProductPageParams => {
+export const isProductPageParam = (object: unknown): object is ProductPageParams => {
 	if (object !== null && typeof object === 'object') {
 		return 'id' in object;
 	}
@@ -51,9 +45,7 @@ export const isProductPageParam = (
 	return false;
 };
 
-export const isSearchPageQuery = (
-	object: ParsedUrlQuery
-): object is SearchPageQuery => {
+export const isSearchPageQuery = (object: ParsedUrlQuery): object is SearchPageQuery => {
 	if (object !== null && typeof object === 'object') {
 		return 'make' in object;
 	}

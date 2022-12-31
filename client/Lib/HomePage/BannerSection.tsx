@@ -12,14 +12,7 @@ export const BannerSection: NextPage = () => {
 	};
 
 	return (
-		<Grid
-			container
-			id="BannerSection"
-			direction="column"
-			alignItems="center"
-			justifyContent="center"
-			sx={bannerStyle}
-		>
+		<Grid container id="BannerSection" direction="column" alignItems="center" justifyContent="center" sx={bannerStyle}>
 			<Grid
 				item
 				sx={{
@@ -38,21 +31,9 @@ export const BannerSection: NextPage = () => {
 					priority
 				/>
 			</Grid>
-			<Grid
-				item
-				container
-				direction="column"
-				alignItems="center"
-				justifyContent="center"
-				spacing={2}
-				sx={{ position: 'absolute' }}
-			>
+			<Grid item container direction="column" alignItems="center" justifyContent="center" spacing={2} sx={{ position: 'absolute' }}>
 				<Grid item>
-					<Typography
-						variant="h6"
-						align="center"
-						sx={{ color: '#ffff', fontSize: '2em' }}
-					>
+					<Typography variant="h6" align="center" sx={{ color: '#ffff', fontSize: '2em' }}>
 						Buy Your Car Today, At Cheaper Prices
 					</Typography>
 				</Grid>
