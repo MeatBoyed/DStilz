@@ -1,5 +1,6 @@
 export { default as Theme } from './Theme';
 export { default as Price } from './Components/Price';
+export { default as Header } from './Components/Header';
 export { default as Footer } from './Components/Footer';
 export { default as Menu } from './Components/Navbar/Menu';
 export { default as Navbar } from './Components/Navbar/Navbar';
