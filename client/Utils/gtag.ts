@@ -1,5 +1,11 @@
 export const GA_TRACKING_ID = 'G-6F9JKL0E3Q';
 
+declare global {
+	interface Window {
+		gtag: any;
+	}
+}
+
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: URL) => {
 	window.gtag('config', GA_TRACKING_ID, {
