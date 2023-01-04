@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { NextPage } from 'next';
+import Script from 'next/script';
 
 export const Header: NextPage = () => {
 	return (
@@ -39,6 +40,7 @@ export const Header: NextPage = () => {
 
 			{/* <!-- Manifest for PWA --> */}
 			<link rel="manifest" href="manifest.json" />
+
 			<title>Search for Cars - Dstilez Auto</title>
 		</Head>
 	);
