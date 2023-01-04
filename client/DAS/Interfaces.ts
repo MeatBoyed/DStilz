@@ -1,4 +1,5 @@
 import { Specification, Vehicle } from '@prisma/client';
+import { MuiTelInputInfo } from 'mui-tel-input';
 import { GetStaticPathsResult } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
@@ -8,9 +9,7 @@ export interface IDASClient {
 	getHomePageDataAsync(): Promise<HomePageDataProp>;
 	generateStaticPaths(): Promise<GetStaticPathsResult>;
 	getSearchPageDataAsync(query: ParsedUrlQuery): Promise<SearchPageDataProp>;
-	getProductPageDataAsync(
-		id: string
-	): Promise<ProductPageDataProp | NotFoundResult>;
+	getProductPageDataAsync(id: string): Promise<ProductPageDataProp | NotFoundResult>;
 }
 
 // Page Props
@@ -38,6 +37,17 @@ export interface IHomePageData {
 }
 export interface HomePageDataProp {
 	props: IHomePageData;
+}
+
+// Api/enquire
+export interface EnquireData {
+	name: string;
+	email: string;
+	phone: string;
+	surname: string;
+	willTrade: boolean;
+	isEnquire: boolean;
+	requireFinance: boolean;
 }
 
 // Component Props
@@ -73,4 +83,8 @@ export interface NotFoundResult {
 
 export interface FullVehicle extends Vehicle {
 	specification: Specification;
+}
+export interface Phone {
+	value: string;
+	info: MuiTelInputInfo;
 }

@@ -1,6 +1,7 @@
+import { NextApiRequest } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { Interface } from 'readline';
-import { FullVehicle, ProductPageParams, SearchPageQuery } from './Interfaces';
+import { EnquireData, FullVehicle, ProductPageParams, SearchPageQuery } from './Interfaces';
 
 // Primitive Type Checking
 export const getAsString = (value: string | string[]): string => {
@@ -9,6 +10,15 @@ export const getAsString = (value: string | string[]): string => {
 	}
 
 	return value;
+};
+
+export const getAsBool = (value: string | string[]): boolean => {
+	if (value === 'false') {
+		return false;
+	} else if (value === 'true') {
+		return true;
+	}
+	return false;
 };
 
 export const getValueStr = (value: string | string[] | undefined): string | null => {
@@ -48,6 +58,15 @@ export const isProductPageParam = (object: unknown): object is ProductPageParams
 export const isSearchPageQuery = (object: ParsedUrlQuery): object is SearchPageQuery => {
 	if (object !== null && typeof object === 'object') {
 		return 'make' in object;
+	}
+
+	return false;
+};
+
+// api/enquire
+export const isEnquireData = (object: NextApiRequest['body']): object is EnquireData => {
+	if (object !== null && typeof object === 'object') {
+		return 'isEnquire' in object;
 	}
 
 	return false;
