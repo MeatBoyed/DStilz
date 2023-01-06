@@ -7,8 +7,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Lead (Enquire) Tickets
+model Lead {
+  id            String      @id @default(cuid())
+  vehicleId     String      
+  customerId    String      
+  salesPersonId String      
+  status        String
+  enquiryDate   DateTime    @default(now())
+  vehicle       Vehicle     @relation(fields: [vehicleId], references: [id])
+  customer      Customer    @relation(fields: [customerId], references: [id])
+  salesPerson   SalesPerson @relation(fields: [salesPersonId], references: [id])
+}
+
+model SalesPerson {
+  id                 String    @id @default(cuid())
+  name               String
+  surname            String
+  email              String    @unique
+  phoneNumber        String
+  countryCallingCode String
+  leads              Lead[]
+  vehicles           Vehicle[]
+}
+
+model Customer {
+  id                 String @id @default(cuid())
+  name               String
+  surname            String
+  email              String
+  phoneNumber        String @unique
+  countryCallingCode String
+  enquires           Lead[]
+}
+
+// Complete Vehicle Object
 model Vehicle {
   id            String         @id @default(cuid())
+  salesPersonId String?
   title         String
   make          String
   model         String
@@ -20,8 +56,10 @@ model Vehicle {
   bodyType      String
   images        String[]
   features      String[]
+  leads         Lead[]
   metaData      MetaData?
   specification Specification?
+  salesPerson   SalesPerson?   @relation(fields: [salesPersonId], references: [id])
 }
 
 model MetaData {

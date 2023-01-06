@@ -5,6 +5,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 // DAS Definitions
 export interface IDASClient {
+	createLead(): Promise<string>;
 	getSearchBoxDataAsync(): Promise<ISearchBoxData>;
 	getHomePageDataAsync(): Promise<HomePageDataProp>;
 	generateStaticPaths(): Promise<GetStaticPathsResult>;
@@ -45,9 +46,18 @@ export interface EnquireData {
 	email: string;
 	phone: string;
 	surname: string;
+	vehicleId: string;
 	willTrade: boolean;
 	isEnquire: boolean;
 	requireFinance: boolean;
+	countryCallingCode: string;
+}
+
+export interface EnquireResponse {
+	message: string;
+	error: string;
+	whatsappLink: string;
+	isValid: boolean;
 }
 
 // Component Props
@@ -83,8 +93,4 @@ export interface NotFoundResult {
 
 export interface FullVehicle extends Vehicle {
 	specification: Specification;
-}
-export interface Phone {
-	value: string;
-	info: MuiTelInputInfo;
 }

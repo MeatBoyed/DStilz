@@ -1,21 +1,10 @@
 import { ParsedUrlQuery } from 'querystring';
-import {
-	HomePageDataProp,
-	ISearchBoxData,
-	NotFoundResult,
-	ProductPageDataProp,
-	SearchPageDataProp,
-} from './Interfaces';
-import {
-	getValueNumber,
-	getValueStr,
-	isFullVehicle,
-	isProductPageParam,
-	isSearchPageQuery,
-} from './Utils';
+import { EnquireData, HomePageDataProp, ISearchBoxData, NotFoundResult, ProductPageDataProp, SearchPageDataProp } from './Interfaces';
+import { getValueNumber, getValueStr, isFullVehicle, isProductPageParam, isSearchPageQuery } from './Utils';
 // import prisma from '../Utils/prisma';
 import { prisma } from './prisma';
 import { GetStaticPathsResult } from 'next';
+import { Customer, Prisma } from '@prisma/client';
 
 export class DASClient {
 	// Get Page Data
@@ -29,9 +18,7 @@ export class DASClient {
 		};
 	}
 
-	public async getProductPageDataAsync(
-		id: string
-	): Promise<ProductPageDataProp | NotFoundResult> {
+	public async getProductPageDataAsync(id: string): Promise<ProductPageDataProp | NotFoundResult> {
 		const vehicle = await prisma.vehicle.findUnique({
 			where: {
 				id: id,
@@ -57,9 +44,7 @@ export class DASClient {
 	}
 
 	// TODO Implement Offsetting
-	public async getSearchPageDataAsync(
-		query: ParsedUrlQuery
-	): Promise<SearchPageDataProp> {
+	public async getSearchPageDataAsync(query: ParsedUrlQuery): Promise<SearchPageDataProp> {
 		if (!isSearchPageQuery(query)) {
 			return {
 				props: {
@@ -105,6 +90,49 @@ export class DASClient {
 				searchBoxData: await this.getSearchBoxDataAsync(),
 			},
 		};
+	}
+
+	// Create Data
+	public async createLead(enquireData: EnquireData): Promise<string> {
+		// Input structures
+		const customerInput: Prisma.CustomerCreateWithoutEnquiresInput = {
+			name: enquireData.name,
+			email: enquireData.email,
+			surname: enquireData.surname,
+			phoneNumber: enquireData.phone,
+			countryCallingCode: enquireData.countryCallingCode,
+		};
+
+		// Get Salesperson number
+		const salesperson = await prisma.salesPerson.findUnique({
+			where: { email: 'dstilezauto@dstilezauto.com' },
+			select: { phoneNumber: true, countryCallingCode: true },
+		});
+
+		if (salesperson?.phoneNumber == null && salesperson?.countryCallingCode == null) {
+			return 'error';
+		}
+
+		await prisma.lead.create({
+			data: {
+				customer: {
+					connectOrCreate: {
+						where: { phoneNumber: enquireData.phone },
+						create: customerInput,
+					},
+				},
+				salesPerson: {
+					connect: { email: 'dstilezauto@dstilezauto.com' },
+				},
+				status: 'Loading',
+				vehicle: {
+					connect: { id: enquireData.vehicleId },
+				},
+			},
+		});
+
+		// Generate WhatsappLink
+		return this.generateWhatsAppLink({ phone: salesperson.phoneNumber, code: salesperson.countryCallingCode }, enquireData.vehicleId);
 	}
 
 	// Util Methods
@@ -154,9 +182,14 @@ export class DASClient {
 		};
 	}
 
-	private async getSearchBoxTextFieldData(): Promise<
-		{ make: string; model: string }[]
-	> {
+	private generateWhatsAppLink(salesperson: { phone: string; code: string }, vehicleId: string): string {
+		const number = salesperson.phone.replace(`+${salesperson.code}`, '').replaceAll(' ', '');
+		const text: string = encodeURI(`Good day,\nI'm intrested in dstilezaauto.com/view-car/${vehicleId} ...`);
+
+		return `https://wa.me/${number}?text=${text}`;
+	}
+
+	private async getSearchBoxTextFieldData(): Promise<{ make: string; model: string }[]> {
 		let data: [{ make: string; model: string }] = [{ make: '', model: '' }];
 
 		const vehicleMMV = await prisma.vehicle.groupBy({
