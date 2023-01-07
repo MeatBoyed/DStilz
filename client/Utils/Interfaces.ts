@@ -110,3 +110,11 @@ export interface CarPageContext extends ParsedUrlQuery {
 export interface ProductCardProps {
 	product: Vehicle;
 }
+export interface ModalData {
+	status: string;
+	messages: [string, string];
+	whatsAppUrl: string;
+	error: boolean;
+	isOpen: boolean;
+	isLoading: boolean;
+}

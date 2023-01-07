@@ -9,7 +9,7 @@ import DAS from '../../Utils/DASClient';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === 'POST') {
 		if (!isEnquireData(req.body) && req.body.vehicleId == '') {
-			res.status(500).json({ message: '', whatsappLink: '', error: 'Data is not correct type', isVaid: true });
+			res.status(500).json({ message: '', whatsappLink: '', error: 'Please ensure you have entered your information correctly', isVaid: true });
 		}
 
 		// Create Lead
@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		// Return 200 with Sucess message & generated whatsapp link
 		if (result === '') {
-			res.status(500).json({ error: 'An error occured. Please try again', message: '', whatsappLink: '', isValid: true });
+			res.status(500).json({ error: 'An unexpected error occured.', message: '', whatsappLink: '', isValid: true });
 		}
 
 		// Send custom messages to the user
