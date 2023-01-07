@@ -13,14 +13,6 @@ export const getAsString = (value: string | string[]): string => {
 	return value;
 };
 
-export const getString = (value: string | string[] | undefined): string => {
-	if (Array.isArray(value)) {
-		return value[0];
-	}
-
-	return value || '';
-};
-
 export const getAsBool = (value: string | string[]): boolean => {
 	if (value === 'false') {
 		return false;
